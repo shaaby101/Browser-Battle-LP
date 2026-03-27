@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 interface Program {
   icon: string;
@@ -57,19 +58,35 @@ const programs: Program[] = [
 export default function ProgramsGrid() {
   return (
     <section
-      className="bg-white py-24 lg:py-32"
+      className="relative py-24 lg:py-32 overflow-hidden"
       id="academics"
       aria-label="Programs Offered"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Background Image Setup */}
+      <div className="absolute inset-0 z-0 select-none">
+        <Image
+          src="/300 acers.jpg"
+          alt="Campus Background for Academic Excellence"
+          fill
+          className="object-cover"
+        />
+        {/* Lighter frosted blur overlay so the white cards pop beautifully while showing the campus */}
+        <div className="absolute inset-0 bg-jain-slate/90 backdrop-blur-md" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white opacity-80" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2">
-            Programs Offered
+          <span className="text-jain-red font-bold tracking-[0.15em] uppercase text-xs shadow-sm mb-3 block">
+            Academic Excellence
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-jain-navy mb-2">
+            B.Tech Programs at Kanakapura
           </h2>
-          <div className="w-14 h-1 bg-theme-red rounded-full mb-5" aria-hidden="true" />
-          <p className="text-gray-500 text-base sm:text-lg max-w-xl">
-            Discover your academic path across diverse world-class disciplines.
+          <div className="w-14 h-1 bg-jain-red rounded-full mb-5" aria-hidden="true" />
+          <p className="text-gray-600 text-base sm:text-lg max-w-xl">
+            Industry-aligned engineering programs with dedicated research labs, global faculty, and 100% placement support.
           </p>
         </div>
 
@@ -80,21 +97,21 @@ export default function ProgramsGrid() {
               href={program.href}
               key={index}
               className="group relative bg-white border-2 border-gray-100 rounded-2xl p-6 flex flex-col gap-3
-                         transition-all duration-300
-                         hover:-translate-y-2 hover:shadow-2xl hover:border-theme-red
-                         focus-visible:outline-2 focus-visible:outline-theme-red focus-visible:outline-offset-2"
+                         transition-all duration-300 shadow-sm
+                         hover:-translate-y-2 hover:shadow-card-lg hover:border-jain-red/30
+                         focus-visible:outline-2 focus-visible:outline-jain-red focus-visible:outline-offset-2"
               tabIndex={0}
               aria-label={`Learn more about ${program.title}`}
             >
               {/* Animated top accent bar */}
               <div
-                className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-theme-red to-red-400 rounded-t-2xl scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-jain-red to-red-400 rounded-t-2xl scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
                 aria-hidden="true"
               />
 
               <span className="text-4xl" aria-hidden="true">{program.icon}</span>
 
-              <h3 className="text-lg font-bold text-gray-900 group-hover:text-theme-red transition-colors duration-200">
+              <h3 className="text-lg font-bold text-jain-navy group-hover:text-jain-red transition-colors duration-200">
                 {program.title}
               </h3>
 
@@ -108,7 +125,7 @@ export default function ProgramsGrid() {
                 ))}
               </ul>
 
-              <span className="inline-flex items-center gap-1 text-sm font-bold text-theme-red group-hover:gap-2.5 transition-all duration-200 mt-1">
+              <span className="inline-flex items-center gap-1 text-sm font-bold text-jain-red group-hover:gap-2.5 transition-all duration-200 mt-1">
                 Know More <ArrowRight size={14} aria-hidden="true" />
               </span>
             </Link>

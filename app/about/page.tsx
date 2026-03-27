@@ -12,7 +12,7 @@ const fadeUp = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: [0.16, 1, 0.3, 1], // Custom professional cubic-bezier
+      ease: 'easeOut',
       delay: i * 0.1,
     },
   }),
@@ -27,19 +27,19 @@ const staggerContainer = {
 };
 
 const stats = [
-  { icon: Award,    title: 'NAAC A++ Accreditation', desc: 'Highest grade awarded for academic and infrastructure excellence in India.' },
-  { icon: Users,    title: '21,000+ Students',       desc: 'A vibrant global community of scholars from 45+ countries.' },
-  { icon: BookOpen, title: '140+ Programs',          desc: 'Comprehensive UG, PG, and doctoral programs driving research and innovation.' },
+  { icon: Award, title: 'NAAC A++ Accreditation', desc: 'Highest grade awarded for academic and infrastructure excellence in India.' },
+  { icon: Users, title: '21,000+ Students', desc: 'A vibrant global community of scholars from 45+ countries.' },
+  { icon: BookOpen, title: '140+ Programs', desc: 'Comprehensive UG, PG, and doctoral programs driving research and innovation.' },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white pb-20">
-      
+    <div className="min-h-screen bg-white">
+
       {/* ── 1. About Us Hero Section ── */}
-      <section className="relative h-[65vh] min-h-[500px] flex items-center justify-center pt-[72px] overflow-hidden" aria-label="About Hero">
+      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden" aria-label="About Hero">
         {/* Background Image with Parallax-style slow scale */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 z-0"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -53,23 +53,24 @@ export default function AboutPage() {
             className="object-cover"
             style={{ objectPosition: 'center 40%' }}
           />
-          {/* Elegant dark gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-jain-navy via-jain-navy/60 to-black/30" />
+          {/* Extremely clean dark overlay — avoids muddy colors */}
+          <div className="absolute inset-0 bg-jain-navy/60 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-jain-navy via-transparent to-transparent opacity-90" />
         </motion.div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24">
           <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="max-w-3xl mx-auto">
             <motion.div variants={fadeUp} className="flex justify-center mb-6">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-[11px] font-bold tracking-[0.2em] uppercase">
-                <MapPin size={12} className="text-jain-red" aria-hidden="true" />
+              <span className="inline-flex items-center gap-2 px-5 py-2 bg-black/20 backdrop-blur-md border border-white/20 rounded-full text-white text-[12px] font-bold tracking-[0.2em] uppercase shadow-lg">
+                <MapPin size={14} className="text-jain-red" aria-hidden="true" />
                 Bengaluru, India
               </span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
-              A Legacy of <span className="text-jain-red">Excellence.</span>
+            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-[1.1]">
+              A Legacy of <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-jain-red">Excellence.</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-lg sm:text-xl text-blue-100/90 leading-relaxed font-medium">
+            <motion.p variants={fadeUp} className="text-lg sm:text-2xl text-blue-50/90 leading-relaxed font-light max-w-2xl mx-auto">
               Ranked among India's top universities, JAIN (Deemed-to-be University) shapes visionary leaders and pioneering engineers globally.
             </motion.p>
           </motion.div>
@@ -77,100 +78,118 @@ export default function AboutPage() {
       </section>
 
       {/* ── 2. Detailed College Information ── */}
-      <section className="py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Left Text Detail */}
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, margin: '-100px' }} 
-            variants={staggerContainer}
-            className="space-y-6"
-          >
-            <motion.span variants={fadeUp} className="text-jain-red font-bold tracking-[0.15em] uppercase text-xs">
-              About JAIN Global Campus
-            </motion.span>
-            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-extrabold text-jain-navy leading-[1.15]">
-              Empowering Minds in a 300+ Acre Eco-Campus
-            </motion.h2>
-            <motion.div variants={fadeUp} className="w-16 h-1 bg-jain-red rounded-full" />
-            
-            <motion.div variants={fadeUp} className="space-y-4 text-gray-600 leading-relaxed text-[15px]">
-              <p>
-                Established with a vision to provide quality education and entrepreneurial development, JAIN Global Campus located in Kanakapura, Bengaluru, is an architectural marvel. Spanning over 300 acres of lush greenery, the campus offers an environment that inspires academic pursuit and holistic growth.
-              </p>
-              <p>
-                Recognised by the UGC and awarded the prestigious NAAC A++ accreditation, our curriculum is deeply integrated with industry requirements. The Kanakapura campus houses dedicated B.Tech, Aerospace, and Management faculties equipped with cutting-edge laboratories, wind tunnels, and AI computing clusters.
-              </p>
+      <section className="py-24 sm:py-32 bg-white relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+            {/* Left Text Detail */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={staggerContainer}
+              className="space-y-8"
+            >
+              <div>
+                <motion.span variants={fadeUp} className="text-jain-red font-bold tracking-[0.2em] uppercase text-xs mb-4 block">
+                  About JAIN Global Campus
+                </motion.span>
+                <motion.h2 variants={fadeUp} className="text-3xl sm:text-5xl font-extrabold text-jain-navy leading-[1.15] tracking-tight">
+                  Empowering Minds in a 300+ Acre Eco-Campus
+                </motion.h2>
+                <motion.div variants={fadeUp} className="w-20 h-1.5 bg-jain-red rounded-full mt-6" />
+              </div>
+
+              <motion.div variants={fadeUp} className="space-y-5 text-gray-600 text-lg leading-relaxed">
+                <p>
+                  Established with a vision to provide quality education and entrepreneurial development, JAIN Global Campus located in Kanakapura, Bengaluru, is an architectural marvel. Spanning over 300 acres of lush greenery, the campus offers an environment that inspires academic pursuit and holistic growth.
+                </p>
+                <p>
+                  Recognised by the UGC and awarded the prestigious NAAC A++ accreditation, our curriculum is deeply integrated with industry requirements. The Kanakapura campus houses dedicated B.Tech, Aerospace, and Management faculties equipped with cutting-edge laboratories, wind tunnels, and AI computing clusters.
+                </p>
+              </motion.div>
+
+              <motion.ul variants={fadeUp} className="space-y-4 pt-4 border-t border-gray-100">
+                {[
+                  '100% Placement Assistance with Fortune 500 tie-ups',
+                  'State-of-the-art Sprintoor Indoor Arena (80,000 sq.ft)',
+                  'Dedicated Innovation & Incubation Center (JUiNC)',
+                  'Global faculty and international exchange programs'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-4">
+                    <div className="mt-1 bg-red-50 p-1 rounded-full text-jain-red">
+                      <CheckCircle2 size={16} className="flex-shrink-0" />
+                    </div>
+                    <span className="text-base font-semibold text-jain-navy">{item}</span>
+                  </li>
+                ))}
+              </motion.ul>
             </motion.div>
 
-            <motion.ul variants={fadeUp} className="space-y-3 pt-2">
-              {[
-                '100% Placement Assistance with Fortune 500 tie-ups',
-                'State-of-the-art Sprintoor Indoor Arena (80,000 sq.ft)',
-                'Dedicated Innovation & Incubation Center (JUiNC)',
-                'Global faculty and international exchange programs'
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-jain-red mt-0.5 flex-shrink-0" />
-                  <span className="text-sm font-semibold text-jain-navy">{item}</span>
-                </li>
-              ))}
-            </motion.ul>
-          </motion.div>
-
-          {/* Right Floating Stats Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-jain-slate rounded-[2rem] p-8 sm:p-10 shadow-card-lg relative"
-          >
-            <div className="absolute top-0 right-10 w-24 h-24 bg-jain-red/5 rounded-full blur-2xl" />
-            <div className="relative z-10 space-y-8">
-              {stats.map(({ icon: Icon, title, desc }, i) => (
-                <motion.div 
-                  key={i}
-                  whileHover={{ x: 8 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className="flex gap-5 group"
-                >
-                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm border border-gray-100 group-hover:border-jain-red/30 group-hover:bg-red-50 transition-colors">
-                    <Icon size={24} className="text-jain-red" aria-hidden="true" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-extrabold text-jain-navy mb-1.5">{title}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed font-medium">{desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+            {/* Right Detailed Image with Floating Glassmorphism Cards */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, x: 20 }}
+              whileInView={{ opacity: 1, scale: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              className="relative h-[700px] rounded-[2rem] overflow-hidden shadow-2xl"
+            >
+              <Image
+                src="/infractucture.jpg"
+                alt="Empowering Campus Infrastructure"
+                fill
+                className="object-cover transition-transform duration-1000 hover:scale-105"
+                style={{ objectPosition: 'center 40%' }}
+              />
+              {/* Deep gradient to make floating cards highly readable */}
+              <div className="absolute inset-0 bg-gradient-to-t from-jain-navy/95 via-jain-navy/40 to-transparent" />
+              
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-10 space-y-4">
+                {stats.map(({ icon: Icon, title, desc }, i) => (
+                  <motion.div
+                    key={i}
+                    whileHover={{ x: 8 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                    className="flex bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 items-center gap-5 shadow-lg"
+                  >
+                    <div className="w-14 h-14 bg-jain-red rounded-xl flex items-center justify-center flex-shrink-0 shadow-inner">
+                      <Icon size={26} className="text-white" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-1 tracking-wide">{title}</h3>
+                      <p className="text-sm text-gray-200 leading-snug">{desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ── 3. Image Gallery / Visuals ── */}
-      <section className="bg-jain-navy py-24">
+      <section className="bg-gray-50 py-24 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl font-extrabold text-white mb-4">Capturing Campus Life</h2>
-            <div className="w-12 h-1 bg-jain-red rounded-full mx-auto" aria-hidden="true" />
+            <span className="text-jain-red font-bold tracking-[0.2em] uppercase text-xs mb-3 block">
+              Discover Kanakapura
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-jain-navy mb-5 tracking-tight">Capturing Campus Life</h2>
+            <div className="w-16 h-1.5 bg-jain-red rounded-full mx-auto" aria-hidden="true" />
           </motion.div>
 
           {/* Image Grid with elegant hover reveals */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { src: '/about-1.jpg', alt: 'Campus Aerial View', label: '300-Acre Campus' },
-              { src: '/about-2.jpg', alt: 'Students Studying', label: 'Modern Infrastructure' },
-              { src: '/about-3.jpg', alt: 'Sports Facilities', label: 'The Oval Cricket Ground' },
+              { src: '/300 acers.jpg', alt: 'Campus Aerial View', label: '300-Acre Campus' },
+              { src: '/infractucture.jpg', alt: 'Students Studying', label: 'Modern Infrastructure' },
+              { src: '/cricketground.jpg', alt: 'Sports Facilities', label: 'The Oval Cricket Ground' },
             ].map((img, i) => (
               <motion.div
                 key={img.src}
@@ -178,17 +197,16 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.15 }}
-                whileHover={{ y: -8 }}
-                className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
+                whileHover={{ y: -10 }}
+                className="group relative h-96 rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all"
               >
-                {/* Fallback color if images are not uploaded yet */}
-                <div className="absolute inset-0 bg-jain-slate/10" />
+                <div className="absolute inset-0 bg-gray-200" />
                 <img src={img.src} alt={img.alt} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-jain-navy via-jain-navy/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-                  <p className="text-white font-bold text-lg">{img.label}</p>
-                  <p className="text-red-300 text-xs font-semibold tracking-widest uppercase mt-1 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                    Explore <ChevronRight size={12} />
+                <div className="absolute inset-0 bg-gradient-to-t from-jain-navy/90 via-jain-navy/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <p className="text-white font-bold text-2xl tracking-wide leading-tight">{img.label}</p>
+                  <p className="text-red-300 text-sm font-bold tracking-[0.15em] uppercase mt-3 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+                    Explore <ChevronRight size={16} />
                   </p>
                 </div>
               </motion.div>
