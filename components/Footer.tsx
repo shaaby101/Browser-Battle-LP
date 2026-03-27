@@ -13,11 +13,11 @@ const RECENT_POSTS = [
 ];
 
 const SOCIAL = [
-  { icon: Facebook,  label: 'Facebook',  href: '#' },
-  { icon: Twitter,   label: 'Twitter',   href: '#' },
-  { icon: Instagram, label: 'Instagram', href: '#' },
-  { icon: Linkedin,  label: 'LinkedIn',  href: '#' },
-  { icon: Youtube,   label: 'YouTube',   href: '#' },
+  { icon: Facebook,  label: 'Facebook',  href: 'https://www.facebook.com/JAINDeemedtobeUniversityOfficial/' },
+  { icon: Twitter,   label: 'Twitter',   href: 'https://x.com/jaincollege' },
+  { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/jainuniversityofficial?igsh=ajNucmF0N2Y4aXQ0' },
+  { icon: Linkedin,  label: 'LinkedIn',  href: 'https://www.linkedin.com/school/jaindeemedtobeuniversity/' },
+  { icon: Youtube,   label: 'YouTube',   href: 'https://youtube.com/@jaindeemedtobeuniversity?si=-KTQSxBCKf4qlLc1' },
 ];
 
 export default function Footer() {
@@ -45,6 +45,8 @@ export default function Footer() {
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-8 h-8 rounded-full bg-white/10 hover:bg-jain-red text-white flex items-center justify-center transition-colors duration-300"
                 >

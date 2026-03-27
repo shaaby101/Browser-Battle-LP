@@ -1,264 +1,208 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Users, Award, CalendarDays, MapPin, ArrowUpRight, Network, Quote } from "lucide-react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { 
+  Users, 
+  Calendar, 
+  MapPin, 
+  Award, 
+  Briefcase, 
+  ChevronRight, 
+  ArrowRight,
+  Globe,
+  Heart
+} from 'lucide-react';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.6, delay: i * 0.1 }
+  })
+};
 
 const EVENTS = [
   {
-    year: "2024",
-    title: "Bangalore Alumni Meet 2024",
-    date: "1 June 2024",
-    location: "Bengaluru, India",
-    image: "/alumini2024.jpg",
-    highlight:
-      "A landmark city meet bringing together alumni from engineering, management, commerce and sciences for an evening of networking and nostalgia.",
-    details: [
-      "Over 350 alumni from across India and overseas in attendance.",
-      "Panel conversations with industry leaders and notable JAIN alumni.",
-      "Launch of city-wise alumni chapters and mentoring initiatives.",
-    ],
+    year: '2026',
+    title: '1st Alumni Connect 2026',
+    date: 'February 7, 2026',
+    location: 'Seminar Hall, JU-FET, Bangalore',
+    description: 'The Series Launch of "Alumni Connect 2026" focused on bridging the gap between industry leaders and the future generation of engineers. A landmark event celebrating professional achievements and global networking.',
+    image: '/alimini2026.jpg',
+    color: 'from-blue-600 to-indigo-700'
   },
   {
-    year: "2025",
-    title: "Campus Homecoming & Batch Reconnects 2025",
-    date: "Summer 2025 Season",
-    location: "Kanakapura Road Campus, Bengaluru",
-    image: "/alimini2025.jpg",
-    highlight:
-      "A full-day campus experience for alumni with curated department-wise reconnects, lab visits and interactions with faculty.",
-    details: [
-      "Guided campus walks featuring the latest infrastructure and research spaces.",
-      "Batch-wise networking lounges and mentoring corners for current students.",
-      "Showcase of alumni-founded startups and industry collaborations.",
-    ],
+    year: '2025',
+    title: 'Alumni Highlights: Inceptrix & Lumina',
+    date: 'November 2025',
+    location: 'Global Campus, Kanakapura',
+    description: 'A year of cultural resurgence and mentorship. Alumni from batches 2010 to 2025 returned to campus for innovation sprints and cultural showcases, strengthening the bond with their alma mater.',
+    image: '/alimini2025.jpg',
+    color: 'from-amber-500 to-orange-600'
   },
   {
-    year: "2026",
-    title: "1st Alumni Connect 2026 – Global Leadership Conclave",
-    date: "Planned for 2026",
-    location: "Hybrid – Bengaluru & Virtual",
-    image: "/alimini2026.jpg",
-    highlight:
-      "The inaugural edition of an annual alumni leadership series connecting global JAIN graduates with campus and each other.",
-    details: [
-      "Keynotes by distinguished alumni from technology, finance, design and public policy.",
-      "Thematic roundtables on emerging careers, global mobility and entrepreneurship.",
-      "Launch of structured alumni mentoring grids for current students.",
-    ],
-  },
+    year: '2024',
+    title: 'Grand Alumni Meet 2024',
+    date: 'June 1, 2024',
+    location: 'JAIN Global Campus, Bangalore',
+    description: 'A nostalgic journey back to campus. Over 1000+ alumni gathered for networking sessions, campus tours, and a gala social evening, fostering camaraderie and a lasting university spirit.',
+    image: '/alumini2024.jpg',
+    color: 'from-jain-red to-red-800'
+  }
 ];
 
 export default function AlumniPage() {
   return (
-    <main className="pt-[72px] min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-jain-navy">
-        <div className="absolute inset-0 bg-[url('/alimini2025.jpg')] bg-cover bg-center opacity-25" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-jain-navy/90 to-jain-navy/70" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24 flex flex-col lg:flex-row items-center gap-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-red-300 mb-3">
-              <Users size={14} /> JAIN Global Alumni Network
+    <div className="pt-[78px] min-h-screen bg-white">
+      
+      {/* ── HERO SECTION ── */}
+      <section className="relative h-[50vh] flex flex-col justify-center overflow-hidden bg-jain-navy">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/alumini2024.jpg"
+            alt="JAIN Alumni Network"
+            fill
+            priority
+            className="object-cover opacity-40 grayscale-[20%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-jain-navy via-jain-navy/60 to-transparent" />
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-xs font-bold tracking-widest uppercase mb-6">
+              <Users size={14} className="text-red-400" />
+              Global Alumni Network
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4">
-              Once a JAINite,
-              <span className="block text-red-300">Always a JAINite.</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 tracking-tight">
+              Excellence <span className="text-red-400">Reconnected.</span>
             </h1>
-            <p className="text-blue-100 text-sm sm:text-base leading-relaxed mb-6 max-w-xl">
-              With thousands of graduates spread across continents, the JAIN alumni community is a strong
-              and vibrant network that mentors, collaborates and celebrates together.
+            <p className="text-lg sm:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed font-medium">
+              Celebrating the journey of our global ambassadors. From classroom memories to industry leadership.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="#events"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-jain-red hover:bg-red-700 text-white font-semibold text-sm shadow-lg shadow-red-900/40 transition-all hover:scale-[1.02]"
-              >
-                View Recent Alumni Events
-                <ArrowUpRight size={18} />
-              </Link>
-              <a
-                href="https://alumni.jainuniversity.ac.in"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/30 bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-all"
-              >
-                Alumni Connect Portal
-                <Network size={18} />
-              </a>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="w-full max-w-md bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 text-white"
-          >
-            <h2 className="text-lg font-semibold mb-2 flex items-center gap-2">
-              <Award size={18} /> Why stay connected?
-            </h2>
-            <ul className="space-y-2 text-xs sm:text-sm text-blue-50">
-              <li>Access curated networking events across cities and campuses.</li>
-              <li>Engage as mentors, speakers and industry partners for current students.</li>
-              <li>Stay informed about executive education, upskilling and research collaborations.</li>
-            </ul>
           </motion.div>
         </div>
       </section>
 
-      {/* Year-wise Alumni Events */}
-      <section id="events" className="py-14 sm:py-16 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Alumni Events Snapshot</h2>
-              <p className="text-sm sm:text-base text-gray-600 max-w-2xl">
-                Recent and upcoming alumni engagements that keep JAIN graduates connected with each other
-                and with campus.
-              </p>
-            </div>
-            <p className="text-xs text-gray-500 max-w-sm">
-              Images and event information are based on the latest alumni engagement initiatives and are
-              presented in a concise, informative format for prospective and existing alumni.
-            </p>
+      {/* ── ALUMNI PORTAL CTA ── */}
+      <section className="relative z-20 -mt-12 max-w-4xl mx-auto px-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="bg-white rounded-3xl shadow-2xl p-8 sm:p-10 border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-8"
+        >
+          <div className="flex-1">
+            <h2 className="text-2xl font-bold text-jain-navy mb-2">Join the Alumni Connect Portal</h2>
+            <p className="text-gray-500 text-sm font-medium">Register today to access job boards, mentorship programs, and exclusive event invitations.</p>
           </div>
+          <button className="inline-flex items-center gap-2 px-8 py-4 bg-jain-red hover:bg-red-700 text-white font-bold rounded-2xl transition-all hover:scale-105 active:scale-95 shadow-xl shadow-red-200">
+            Register Now <ArrowRight size={18} />
+          </button>
+        </motion.div>
+      </section>
 
-          <div className="space-y-8">
-            {EVENTS.map((event, index) => (
-              <motion.article
-                key={event.year}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-6 lg:gap-10 items-stretch bg-gray-50 border border-gray-100 rounded-3xl overflow-hidden shadow-sm"
-              >
-                <div className="relative min-h-[220px] sm:min-h-[260px]">
+      {/* ── YEAR-WISE EVENTS ── */}
+      <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-20">
+          <span className="text-jain-red font-bold text-sm tracking-widest uppercase block mb-3">Our Legacy in Action</span>
+          <h2 className="text-3xl sm:text-4xl font-black text-jain-navy mb-4">Milestone Alumni Reconnects</h2>
+          <div className="w-16 h-1 bg-jain-red mx-auto rounded-full" />
+        </div>
+
+        <div className="space-y-32">
+          {EVENTS.map((event, i) => (
+            <motion.div 
+              key={event.year}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-center`}
+            >
+              {/* Image Side */}
+              <div className="w-full lg:w-1/2 relative group">
+                <div className={`absolute -inset-4 bg-gradient-to-br ${event.color} opacity-10 rounded-[2.5rem] group-hover:opacity-20 transition-opacity`} />
+                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                   <Image
                     src={event.image}
                     alt={event.title}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute top-4 left-4 rounded-full bg-black/60 text-white text-xs font-semibold px-3 py-1 flex items-center gap-2">
-                    <CalendarDays size={14} />
-                    <span>{event.year}</span>
+                  <div className="absolute top-6 left-6 px-6 py-2 bg-white rounded-2xl shadow-xl">
+                    <span className="text-2xl font-black text-jain-navy">{event.year}</span>
                   </div>
                 </div>
+              </div>
 
-                <div className="p-6 sm:p-7 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-1">{event.title}</h3>
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600 mb-3">
-                      <span className="inline-flex items-center gap-1">
-                        <CalendarDays size={14} /> {event.date}
-                      </span>
-                      <span className="inline-flex items-center gap-1">
-                        <MapPin size={14} /> {event.location}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-700 mb-3">{event.highlight}</p>
-                    <ul className="list-disc list-inside text-xs sm:text-sm text-gray-600 space-y-1">
-                      {event.details.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
+              {/* Content Side */}
+              <div className="w-full lg:w-1/2 space-y-6">
+                <div className="flex items-center gap-4 text-jain-red font-bold text-xs tracking-widest uppercase">
+                  <Calendar size={16} />
+                  {event.date}
                 </div>
-              </motion.article>
-            ))}
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-jain-navy leading-tight">{event.title}</h3>
+                <div className="flex items-center gap-2 text-gray-500 font-semibold text-sm">
+                  <MapPin size={16} className="text-red-400" />
+                  {event.location}
+                </div>
+                <p className="text-gray-600 text-lg leading-relaxed pt-2">
+                  {event.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── ALUMNI IMPACT ── */}
+      <section className="py-24 bg-gray-50 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid lg:grid-cols-3 gap-8">
+            <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6">
+                <Globe size={32} />
+              </div>
+              <h4 className="text-4xl font-black text-jain-navy mb-2">50,000+</h4>
+              <p className="text-gray-500 font-bold uppercase tracking-wider text-xs">Global Alumni Network</p>
+            </div>
+            <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-jain-red mb-6">
+                <Briefcase size={32} />
+              </div>
+              <h4 className="text-4xl font-black text-jain-navy mb-2">93%+</h4>
+              <p className="text-gray-500 font-bold uppercase tracking-wider text-xs">Placement Record</p>
+            </div>
+            <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 mb-6">
+                <Award size={32} />
+              </div>
+              <h4 className="text-4xl font-black text-jain-navy mb-2">150+</h4>
+              <p className="text-gray-500 font-bold uppercase tracking-wider text-xs">Industry Collaborations</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Alumni Benefits & Stories */}
-      <section className="py-14 sm:py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-10 lg:gap-14 items-start">
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">Stay Connected, Stay Ahead</h2>
-            <p className="text-sm sm:text-base text-gray-600 mb-5 max-w-2xl">
-              The JAIN alumni ecosystem opens doors to knowledge sharing, career mobility and
-              cross-industry collaboration. By staying engaged, you strengthen both your own professional
-              journey and that of the next generation of JAIN graduates.
-            </p>
-            <div className="grid sm:grid-cols-2 gap-4 text-xs sm:text-sm">
-              <div className="bg-white border border-gray-100 rounded-2xl p-4">
-                <p className="font-semibold mb-1">Alumni Connect Portal</p>
-                <p className="text-gray-600 mb-2">
-                  A dedicated digital space to update your profile, discover events and connect with
-                  classmates and faculty.
-                </p>
-                <Link
-                  href="https://alumni.jainuniversity.ac.in"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-jain-navy font-semibold text-xs hover:text-jain-red"
-                >
-                  Visit Portal <ArrowUpRight size={14} />
-                </Link>
-              </div>
-              <div className="bg-white border border-gray-100 rounded-2xl p-4">
-                <p className="font-semibold mb-1">Networking & Career Mobility</p>
-                <p className="text-gray-600">
-                  City chapters and professional clusters help you explore new roles, geographies and
-                  collaborative projects.
-                </p>
-              </div>
-              <div className="bg-white border border-gray-100 rounded-2xl p-4">
-                <p className="font-semibold mb-1">Mentoring & Giving Back</p>
-                <p className="text-gray-600">
-                  Speak in classrooms, mentor students, support internships and co-create industry
-                  projects with your alma mater.
-                </p>
-              </div>
-              <div className="bg-white border border-gray-100 rounded-2xl p-4">
-                <p className="font-semibold mb-1">Lifelong Learning</p>
-                <p className="text-gray-600">
-                  Stay updated on executive programmes, certifications and specialised courses hosted by
-                  various JAIN schools.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-7 shadow-sm">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-full bg-jain-navy/10 flex items-center justify-center">
-                <Quote size={18} className="text-jain-navy" />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-gray-500 font-semibold">
-                  Alumni Voices
-                </p>
-                <p className="text-sm font-semibold text-gray-900">Representative success journeys</p>
-              </div>
-            </div>
-            <div className="space-y-4 text-xs sm:text-sm text-gray-700">
-              <p>
-                “The alumni network at JAIN has been instrumental in opening global opportunities. From my
-                first role in Bengaluru to a leadership position overseas, fellow JAIN graduates have been
-                a constant support system.”
-              </p>
-              <p className="font-semibold text-gray-900">Engineering Alumni – Class of 2014</p>
-              <hr className="border-dashed border-gray-200" />
-              <p>
-                “Coming back as a guest speaker and mentor is deeply fulfilling. It is a chance to give
-                back while also staying updated on new-age skills and programmes being introduced at the
-                university.”
-              </p>
-              <p className="font-semibold text-gray-900">Management Alumni – Class of 2012</p>
-            </div>
+      {/* ── CONTACT SECTION ── */}
+      <section className="bg-jain-red py-20 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <Heart size={48} className="text-white opacity-20 mx-auto mb-6" />
+          <h2 className="text-3xl sm:text-4xl font-black text-white mb-6">Stay Connected, Stay Inspired</h2>
+          <p className="text-red-100 text-lg mb-10 max-w-xl mx-auto font-medium">
+            Join the Alumni Relations office in shaping the future of JAIN University. Your success is our legacy.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/contact-us" className="px-10 py-4 bg-white text-jain-red font-bold rounded-2xl shadow-2xl hover:scale-105 transition-transform">
+              Contact Alumni Office
+            </Link>
           </div>
         </div>
       </section>
-    </main>
+
+    </div>
   );
 }
