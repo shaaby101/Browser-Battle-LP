@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X, ChevronDown, Search, Cpu, Briefcase, Calculator, FlaskConical, Palette, BookOpen, Scale, HeartPulse, Monitor } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X, ChevronDown, Search, Cpu, Briefcase, Calculator, FlaskConical, Palette, BookOpen, Scale, HeartPulse, Monitor, GraduationCap, Home, Phone, FlaskRound, Building, Users, Award } from 'lucide-react';
 
 const TOP_LINKS = [
   { label: 'AY 25-26', href: '#' },
@@ -36,12 +36,61 @@ const DEPARTMENT_CATEGORIES = [
   { icon: Monitor, label: 'Applied Computing', href: '/departments/computing', color: 'text-cyan-600', bg: 'bg-cyan-50' },
 ];
 
+// Search data - all searchable items on the website
+const SEARCH_DATA = [
+  // Main Pages
+  { title: 'Home', description: 'JAIN University Homepage', href: '/', category: 'Pages', icon: Home },
+  { title: 'About Us', description: 'Learn about JAIN University', href: '/about', category: 'Pages', icon: Building },
+  { title: 'Admissions', description: 'Apply for admission', href: '/admissions', category: 'Pages', icon: GraduationCap },
+  { title: 'Academics', description: 'Academic programs overview', href: '/academics', category: 'Pages', icon: BookOpen },
+  { title: 'Departments', description: 'Browse all departments', href: '/departments', category: 'Pages', icon: Building },
+  { title: 'Research', description: 'Research initiatives', href: '/research', category: 'Pages', icon: FlaskRound },
+  { title: 'Placements', description: 'Career services & placements', href: '/placements', category: 'Pages', icon: Briefcase },
+  { title: 'Campus Life', description: 'Student life at JAIN', href: '/campus-life', category: 'Pages', icon: Users },
+  { title: 'Contact Us', description: 'Get in touch', href: '/contact-us', category: 'Pages', icon: Phone },
+  
+  // Departments
+  { title: 'Engineering & Technology', description: 'B.Tech, M.Tech programs', href: '/departments/engineering', category: 'Departments', icon: Cpu },
+  { title: 'Management', description: 'BBA, MBA programs', href: '/departments/management', category: 'Departments', icon: Briefcase },
+  { title: 'Commerce', description: 'B.Com, M.Com programs', href: '/departments/commerce', category: 'Departments', icon: Calculator },
+  { title: 'Sciences', description: 'B.Sc, M.Sc programs', href: '/departments/sciences', category: 'Departments', icon: FlaskConical },
+  { title: 'Creative Arts & Design', description: 'Design & Media programs', href: '/departments/creative-arts', category: 'Departments', icon: Palette },
+  { title: 'Humanities & Social Sciences', description: 'BA, MA programs', href: '/departments/humanities', category: 'Departments', icon: BookOpen },
+  { title: 'Law', description: 'LLB, LLM programs', href: '/departments/law', category: 'Departments', icon: Scale },
+  { title: 'Allied Healthcare', description: 'Healthcare programs', href: '/departments/healthcare', category: 'Departments', icon: HeartPulse },
+  { title: 'Applied Computing', description: 'BCA, MCA programs', href: '/departments/computing', category: 'Departments', icon: Monitor },
+  
+  // Programs
+  { title: 'B.Tech Computer Science', description: 'AI, ML, Cybersecurity', href: '/departments/engineering', category: 'Programs', icon: Cpu },
+  { title: 'B.Tech Aerospace Engineering', description: 'Aeronautical studies', href: '/departments/engineering', category: 'Programs', icon: Cpu },
+  { title: 'MBA Finance', description: 'Management postgraduate', href: '/departments/management', category: 'Programs', icon: Briefcase },
+  { title: 'MBA Marketing', description: 'Marketing specialization', href: '/departments/management', category: 'Programs', icon: Briefcase },
+  { title: 'BBA Corporate Management', description: 'Undergraduate business', href: '/departments/management', category: 'Programs', icon: Briefcase },
+  { title: 'B.Com Professional', description: 'CA, CMA integrated', href: '/departments/commerce', category: 'Programs', icon: Calculator },
+  { title: 'B.Sc Biotechnology', description: 'Life sciences', href: '/departments/sciences', category: 'Programs', icon: FlaskConical },
+  { title: 'BCA Artificial Intelligence', description: 'Computer applications', href: '/departments/computing', category: 'Programs', icon: Monitor },
+  { title: 'BA LLB', description: 'Integrated law program', href: '/departments/law', category: 'Programs', icon: Scale },
+  { title: 'B.Des Communication Design', description: 'Design program', href: '/departments/creative-arts', category: 'Programs', icon: Palette },
+  
+  // Quick Links
+  { title: 'Apply Now', description: 'Start your application', href: '/admissions', category: 'Quick Links', icon: GraduationCap },
+  { title: 'Placement Statistics', description: '93%+ placement rate', href: '/placements', category: 'Quick Links', icon: Award },
+  { title: 'Campus Tour', description: 'Explore our campus', href: '/campus-life', category: 'Quick Links', icon: Building },
+  { title: 'Fee Structure', description: 'Course fees information', href: '/admissions', category: 'Quick Links', icon: Calculator },
+  { title: 'Scholarships', description: 'Financial aid options', href: '/admissions', category: 'Quick Links', icon: Award },
+];
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [departmentsOpen, setDepartmentsOpen] = useState(false);
   const [mobileDepartmentsOpen, setMobileDepartmentsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<typeof SEARCH_DATA>([]);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -53,7 +102,65 @@ export default function Navbar() {
     setIsOpen(false);
     setDepartmentsOpen(false);
     setMobileDepartmentsOpen(false);
+    setSearchOpen(false);
+    setSearchQuery('');
   }, [pathname]);
+
+  // Focus input when search opens
+  useEffect(() => {
+    if (searchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [searchOpen]);
+
+  // Handle escape key to close search
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+    if (searchOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [searchOpen]);
+
+  // Search functionality
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setSearchResults([]);
+      return;
+    }
+    
+    const query = searchQuery.toLowerCase();
+    const filtered = SEARCH_DATA.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.description.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query)
+    ).slice(0, 8);
+    
+    setSearchResults(filtered);
+  }, [searchQuery]);
+
+  const handleSearchSelect = (href: string) => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    router.push(href);
+  };
+
+  const groupedResults = searchResults.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = [];
+    }
+    acc[item.category].push(item);
+    return acc;
+  }, {} as Record<string, typeof SEARCH_DATA>);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-md' : ''}`}>
@@ -167,14 +274,22 @@ export default function Navbar() {
             })}
           </ul>
 
-          <button className="w-9 h-9 bg-[#12366b] hover:bg-[#0c2347] rounded-full flex items-center justify-center text-white transition-colors ml-2 shadow-sm" aria-label="Search">
+          <button 
+            onClick={() => setSearchOpen(true)}
+            className="w-9 h-9 bg-[#12366b] hover:bg-[#0c2347] rounded-full flex items-center justify-center text-white transition-colors ml-2 shadow-sm" 
+            aria-label="Search"
+          >
             <Search size={16} strokeWidth={2.5} />
           </button>
         </div>
 
         {/* Mobile Hamburger */}
         <div className="lg:hidden flex items-center gap-4">
-          <button className="w-8 h-8 bg-[#12366b] rounded-full flex items-center justify-center text-white" aria-label="Search">
+          <button 
+            onClick={() => setSearchOpen(true)}
+            className="w-8 h-8 bg-[#12366b] rounded-full flex items-center justify-center text-white" 
+            aria-label="Search"
+          >
             <Search size={14} strokeWidth={2.5} />
           </button>
           <button
@@ -240,6 +355,120 @@ export default function Navbar() {
           ))}
         </div>
       </div>
+
+      {/* Search Modal */}
+      {searchOpen && (
+        <div 
+          className="fixed inset-0 z-[9999] flex items-start justify-center pt-[10vh] px-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setSearchOpen(false);
+              setSearchQuery('');
+            }
+          }}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          
+          {/* Modal */}
+          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-200">
+            {/* Search Input */}
+            <div className="flex items-center gap-4 px-6 py-5 border-b border-gray-100">
+              <Search className="text-gray-400 flex-shrink-0" size={22} />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search pages, departments, programs..."
+                className="flex-1 text-lg text-gray-800 placeholder-gray-400 outline-none bg-transparent"
+              />
+              <button 
+                onClick={() => {
+                  setSearchOpen(false);
+                  setSearchQuery('');
+                }}
+                className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Results */}
+            <div className="max-h-[60vh] overflow-y-auto">
+              {searchQuery.trim() === '' ? (
+                // Quick Links when empty
+                <div className="p-6">
+                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Quick Links</h3>
+                  <div className="grid grid-cols-2 gap-2">
+                    {SEARCH_DATA.filter(item => item.category === 'Pages').slice(0, 6).map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <button
+                          key={item.href}
+                          onClick={() => handleSearchSelect(item.href)}
+                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors text-left"
+                        >
+                          <div className="w-10 h-10 bg-[#12366b]/10 rounded-lg flex items-center justify-center">
+                            <Icon size={18} className="text-[#12366b]" />
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold text-gray-800">{item.title}</p>
+                            <p className="text-xs text-gray-500">{item.description}</p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : searchResults.length === 0 ? (
+                // No results
+                <div className="p-10 text-center">
+                  <Search className="mx-auto text-gray-300 mb-3" size={40} />
+                  <p className="text-gray-500 font-medium">No results found</p>
+                  <p className="text-sm text-gray-400 mt-1">Try searching for pages, departments, or programs</p>
+                </div>
+              ) : (
+                // Show results grouped by category
+                <div className="p-4">
+                  {Object.entries(groupedResults).map(([category, items]) => (
+                    <div key={category} className="mb-4">
+                      <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 mb-2">{category}</h3>
+                      <div className="space-y-1">
+                        {items.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <button
+                              key={`${item.href}-${item.title}`}
+                              onClick={() => handleSearchSelect(item.href)}
+                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition-colors text-left group"
+                            >
+                              <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#12366b]/10 rounded-lg flex items-center justify-center transition-colors">
+                                <Icon size={18} className="text-gray-500 group-hover:text-[#12366b] transition-colors" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-semibold text-gray-800 group-hover:text-[#12366b] transition-colors">{item.title}</p>
+                                <p className="text-xs text-gray-500 truncate">{item.description}</p>
+                              </div>
+                              <ChevronDown size={16} className="text-gray-300 -rotate-90 group-hover:text-[#12366b] transition-colors" />
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+              <span>Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-gray-600 font-mono">ESC</kbd> to close</span>
+              <span>Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-gray-600 font-mono">↵</kbd> to select</span>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
