@@ -1,8 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { MapPin, Award, Users, BookOpen, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { MapPin, Award, Users, BookOpen, ChevronRight, CheckCircle2, X } from 'lucide-react';
 
 /* ── Professional Animation Variants ── */
 const fadeUp = {
@@ -12,7 +13,7 @@ const fadeUp = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: 'easeOut',
+      ease: 'easeOut' as const,
       delay: i * 0.1,
     },
   }),
@@ -33,6 +34,8 @@ const stats = [
 ];
 
 export default function AboutPage() {
+  const [showCampusMap, setShowCampusMap] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
 
@@ -187,9 +190,9 @@ export default function AboutPage() {
           {/* Image Grid with elegant hover reveals */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { src: '/300 acers.jpg', alt: 'Campus Aerial View', label: '300-Acre Campus' },
-              { src: '/infractucture.jpg', alt: 'Students Studying', label: 'Modern Infrastructure' },
-              { src: '/cricketground.jpg', alt: 'Sports Facilities', label: 'The Oval Cricket Ground' },
+              { src: '/300 acers.jpg', alt: 'Campus Aerial View', label: '300-Acre Campus', hasMap: true },
+              { src: '/infractucture.jpg', alt: 'Students Studying', label: 'Modern Infrastructure', hasMap: false },
+              { src: '/cricketground.jpg', alt: 'Sports Facilities', label: 'The Oval Cricket Ground', hasMap: false },
             ].map((img, i) => (
               <motion.div
                 key={img.src}
@@ -198,6 +201,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.15 }}
                 whileHover={{ y: -10 }}
+                onClick={() => img.hasMap && setShowCampusMap(true)}
                 className="group relative h-96 rounded-[2rem] overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all"
               >
                 <div className="absolute inset-0 bg-gray-200" />
@@ -206,7 +210,7 @@ export default function AboutPage() {
                 <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <p className="text-white font-bold text-2xl tracking-wide leading-tight">{img.label}</p>
                   <p className="text-red-300 text-sm font-bold tracking-[0.15em] uppercase mt-3 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
-                    Explore <ChevronRight size={16} />
+                    {img.hasMap ? 'View 360° Map' : 'Explore'} <ChevronRight size={16} />
                   </p>
                 </div>
               </motion.div>
@@ -214,6 +218,52 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Campus Map Modal ── */}
+      {showCampusMap && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={() => setShowCampusMap(false)}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-2xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gray-50">
+              <div className="flex items-center gap-3">
+                <MapPin className="w-6 h-6 text-jain-red" />
+                <div>
+                  <h3 className="font-bold text-jain-navy text-xl">300-Acre Campus</h3>
+                  <p className="text-gray-600 text-sm">JAIN Global Campus, Kanakapura</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowCampusMap(false)}
+                className="p-2 hover:bg-gray-200 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-jain-red"
+                aria-label="Close map"
+              >
+                <X className="w-6 h-6 text-gray-600" />
+              </button>
+            </div>
+
+            {/* Map Iframe */}
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!4v1774599882478!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJREI5Nm1OZ2dF!2m2!1d12.64221080387853!2d77.44010150490199!3f282.0046882843104!4f-21.84556191040015!5f0.7820865974627469"
+              width="1024"
+              height="768"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="360° view of JAIN Global Campus"
+            />
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

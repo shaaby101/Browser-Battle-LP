@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 interface Location {
   id: number;
@@ -43,10 +41,10 @@ const locations: Location[] = [
   },
   {
     id: 5,
-    name: 'Sports Complex',
+    name: 'Sports Ground',
     description: 'Olympic-standard facilities for indoor and outdoor sports',
     icon: '🏆',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.4!2d77.54!3d12.974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzMwLjAiTiA3N8KwMzInMjQuMCJF!5e0!3m2!1sen!2sin!4v1234567894',
+    embedUrl: 'https://www.google.com/maps/embed?pb=!4v1774598974443!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJQ08yNVBDdXdF!2m2!1d12.64222630377511!2d77.44000642262301!3f294.85855006842826!4f-7.886005406703546!5f0.7820865974627469" width="1024" height="768" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade',
   },
   {
     id: 6,
@@ -60,7 +58,7 @@ const locations: Location[] = [
     name: 'Laboratory',
     description: 'Cutting-edge research labs with advanced equipment',
     icon: '🔬',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6!2d77.56!3d12.976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzQwLjAiTiA3N8KwMzMnMzYuMCJF!5e0!3m2!1sen!2sin!4v1234567896',
+    embedUrl: 'https://www.google.com/maps/embed?pb=!4v1774603485706!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ08yLTJOYXc.!2m2!1d12.64222563311668!2d77.44007541419238!3f305.2647298546833!4f-8.224462883345382!5f0.7820865974627469" width="1024" height="768" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade',
   },
   {
     id: 8,
@@ -75,9 +73,7 @@ export default function CampusLifePage() {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
 
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
         <section className="relative bg-gradient-to-br from-theme-red to-red-900 py-20 md:py-28">
           <div className="absolute inset-0 bg-black/20" />
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -151,8 +147,6 @@ export default function CampusLifePage() {
             </div>
           </div>
         )}
-      </main>
-      <Footer />
-    </>
+      </div>
   );
 }
