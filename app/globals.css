@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 /* ── Global base styles ── */
-html {
+html,
+body {
   scroll-behavior: smooth;
 }
 
 body {
   @apply antialiased text-gray-900;
 }
+
 
 /* ── Animated underline for nav links ── */
 .nav-link {
