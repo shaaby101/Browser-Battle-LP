@@ -2,14 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, ChevronDown, Search, Cpu, Briefcase, Calculator, FlaskConical, Palette, BookOpen, Scale, HeartPulse, Monitor, GraduationCap, Home, Phone, FlaskRound, Building, Users, Award } from 'lucide-react';
 
 const TOP_LINKS = [
-  { label: 'AY 25-26', href: '#' },
   { label: 'International Admissions', href: '/international-admissions', hasDropdown: false },
   { label: 'Alumni', href: '/alumni' },
-  { label: 'Blogs', href: '#' },
 ];
 
 const MAIN_LINKS = [
@@ -183,17 +182,15 @@ export default function Navbar() {
       <nav className="bg-white px-4 sm:px-6 lg:px-8 h-[78px] flex items-center justify-between" aria-label="Main navigation">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group outline-none" aria-label="JAIN Homepage">
-          <div className="relative w-14 h-14 bg-[#12366b] rounded-full flex flex-col items-center justify-center border-2 border-[#12366b] group-hover:shadow-md transition-shadow">
-            <span className="text-white font-black text-xl leading-none tracking-tighter">JG<span className="text-[#f9b233] text-sm">i</span></span>
-          </div>
-          <div className="flex flex-col justify-center translate-y-1">
-            <span className="text-[#231f20] font-[900] text-[2.1rem] leading-[0.8] tracking-[-0.03em]">JAIN</span>
-            <div className="flex items-center gap-1 mt-1">
-              <div className="w-5 h-[3px] bg-[#231f20]" />
-              <span className="text-gray-500 text-[8px] font-bold tracking-[0.1em] uppercase">DEEMED-TO-BE UNIVERSITY</span>
-            </div>
-          </div>
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0 group outline-none" aria-label="JAIN Homepage">
+          <Image
+            src="https://www.jainuniversity.ac.in/jain/home/assets/images/jain-logo.png"
+            alt="JAIN (Deemed-to-be University) logo"
+            width={180}
+            height={60}
+            className="h-14 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Links */}

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   GraduationCap, Facebook, Twitter, Instagram, Linkedin, Youtube,
   Phone, Mail, MapPin, ChevronRight
@@ -29,13 +30,14 @@ export default function Footer() {
           {/* Col 1 – Brand & About */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-3 group inline-block" aria-label="JAIN Global Campus">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                <GraduationCap size={24} className="text-[#2a305e]" aria-hidden="true" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-white font-black text-lg tracking-wide uppercase">JAIN Global</span>
-                <span className="text-gray-400 text-[10px] tracking-[0.15em] uppercase font-bold">Kanakapura Campus</span>
-              </div>
+              <Image
+                src="https://www.jainuniversity.ac.in/jain/home/assets/images/jain-logo.png"
+                alt="JAIN (Deemed-to-be University) logo"
+                width={200}
+                height={70}
+                className="h-16 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                priority
+              />
             </Link>
             <p className="text-sm leading-relaxed text-gray-300">
               JAIN (Deemed-to-be University) provides world-class education with dedicated B.Tech programs, state-of-the-art infrastructure, and continuous global placements through our specialized management quota seats and merit admissions.

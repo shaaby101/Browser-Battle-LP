@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { 
@@ -17,18 +18,18 @@ const PLACEMENT_STATS = [
 ];
 
 const TOP_RECRUITERS = [
-  { name: 'Amazon', logo: '🛒' },
-  { name: 'Google', logo: '🔍' },
-  { name: 'Deloitte', logo: '📊' },
-  { name: 'Accenture', logo: '💼' },
-  { name: 'Infosys', logo: '🖥️' },
-  { name: 'Wipro', logo: '🌐' },
-  { name: 'IBM', logo: '🔷' },
-  { name: 'Capgemini', logo: '🚀' },
-  { name: 'TCS', logo: '📈' },
-  { name: 'Microsoft', logo: '🪟' },
-  { name: 'Cognizant', logo: '💡' },
-  { name: 'HCL', logo: '⚡' },
+  { name: 'Amazon', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
+  { name: 'Google', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg' },
+  { name: 'Deloitte', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Deloitte.svg' },
+  { name: 'Accenture', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg' },
+  { name: 'Infosys', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg' },
+  { name: 'Wipro', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg' },
+  { name: 'IBM', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg' },
+  { name: 'Capgemini', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9d/Capgemini_201x_logo.svg' },
+  { name: 'TCS', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/TATA_Consultancy_Services_Logo.svg' },
+  { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
+  { name: 'Cognizant', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg' },
+  { name: 'HCL', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/HCLTech_new_logo.svg' },
 ];
 
 const PLACEMENT_PROCESS = [
@@ -192,10 +193,18 @@ export default function PlacementsPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.03 }}
-                className="bg-gray-50 rounded-2xl p-6 flex flex-col items-center justify-center hover:bg-jain-navy/5 transition-colors border border-gray-100"
+                className="bg-white rounded-2xl p-6 flex flex-col items-center justify-center hover:shadow-xl transition-all border border-gray-100"
               >
-                <span className="text-3xl mb-2">{logo}</span>
-                <span className="text-sm font-semibold text-gray-700">{name}</span>
+                <div className="relative w-full h-12 mb-3">
+                  <Image
+                    src={logo}
+                    alt={`${name} official logo`}
+                    fill
+                    className="object-contain"
+                    unoptimized
+                  />
+                </div>
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{name}</span>
               </motion.div>
             ))}
           </div>
