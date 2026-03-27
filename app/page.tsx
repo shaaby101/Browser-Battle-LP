@@ -169,41 +169,7 @@ export default function HomePage() {
             </motion.div>
           </motion.div>
         </div>
-
-        {/* ── Floating Stats Banner ── */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 translate-y-1/2 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="bg-white rounded-2xl shadow-card-lg border-t-4 border-jain-red overflow-hidden"
-            >
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-100">
-                {STATS.map(({ icon: Icon, value, label }, i) => (
-                  <div
-                    key={i}
-                    className="flex flex-col items-center text-center p-5 lg:p-7 hover:bg-gray-50 transition-colors duration-200 group"
-                  >
-                    <div className="w-11 h-11 bg-red-50 group-hover:bg-red-100 rounded-xl flex items-center justify-center mb-3 transition-colors duration-200">
-                      <Icon size={20} className="text-jain-red" aria-hidden="true" />
-                    </div>
-                    <p className="text-lg sm:text-xl lg:text-2xl font-extrabold text-jain-navy leading-tight mb-0.5">
-                      {value}
-                    </p>
-                    <p className="text-[11px] sm:text-xs text-gray-500 font-medium tracking-wide leading-tight">
-                      {label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </div>
       </section>
-
-      {/* ── Spacer below floating stats ── */}
-      <div className="h-24 bg-white" aria-hidden="true" />
 
       {/* ── 2. ACADEMIC EXCELLENCE (Light Photo Overlay) ─ */}
       <section className="relative py-24 lg:py-32 overflow-hidden bg-white" id="academics" aria-label="Programs">

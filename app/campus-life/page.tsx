@@ -93,20 +93,20 @@ export default function CampusLifePage() {
         <div className="absolute inset-0 bg-jain-navy" />
         <div className="absolute inset-0 bg-[url('/infractucture.jpg')] bg-cover bg-center opacity-40 mix-blend-overlay" />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-transparent to-black/50 opacity-90" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-jain-navy mb-6 drop-shadow-md tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white mb-6 drop-shadow-xl tracking-tight"
           >
-            Explore <span className="text-jain-red">Our Campus</span>
+            Explore <span className="text-red-400">Our Campus</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-lg sm:text-zinc-700 max-w-2xl mx-auto font-medium"
+            className="text-lg sm:text-zinc-200 max-w-2xl mx-auto font-medium drop-shadow-md"
           >
             Take an interactive, 360° virtual tour of our world-class facilities and breathtaking 300-acre infrastructure.
           </motion.p>
@@ -141,14 +141,12 @@ export default function CampusLifePage() {
               {/* Dark Gradient Overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0b132b]/95 via-[#0b132b]/40 to-transparent transition-opacity duration-300 group-hover:opacity-90" />
               
-              {/* Play Button Overlay (Visible on Hover) */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0 p-4 text-center">
-                <div className="w-16 h-16 bg-jain-red text-white flex items-center justify-center rounded-full mb-4 shadow-xl shadow-red-500/30 group-hover:scale-110 transition-transform duration-300">
-                  <PlayCircle size={32} />
+              {/* Sleek Button Overlay (Visible on Hover) */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-[#0b132b]/30 backdrop-blur-[2px]">
+                <div className="flex items-center gap-2 bg-white text-jain-navy px-6 py-3 rounded-full shadow-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <MapPin size={16} className="text-jain-red" />
+                  <span className="font-bold text-sm tracking-wide">Enter 360°</span>
                 </div>
-                <span className="text-white font-bold text-sm tracking-[0.1em] uppercase drop-shadow-md">
-                  Launch 360° Tour
-                </span>
               </div>
 
               {/* Text Info */}
