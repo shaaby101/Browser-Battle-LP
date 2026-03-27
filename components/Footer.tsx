@@ -60,15 +60,20 @@ export default function Footer() {
               GET IN TOUCH
             </h3>
             <div className="space-y-6">
-              <div className="flex gap-4 items-start">
-                <MapPin size={18} className="text-white mt-1 flex-shrink-0" aria-hidden="true" />
-                <p className="text-sm leading-relaxed text-gray-300">
+              <a 
+                href="https://www.google.com/maps/search/?api=1&query=JCVR%2B27P+Karnataka+562112"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-4 items-start group cursor-pointer"
+              >
+                <MapPin size={18} className="text-white mt-1 flex-shrink-0 group-hover:text-jain-red transition-colors" aria-hidden="true" />
+                <p className="text-sm leading-relaxed text-gray-300 group-hover:text-white transition-colors">
                   <strong className="text-white block mb-1 tracking-wider text-xs">ADDRESS :</strong>
                   JAIN Global Campus, Jakkasandra Post,<br />
                   Kanakapura Road, Ramanagara District,<br />
                   Bengaluru, Karnataka - 562112
                 </p>
-              </div>
+              </a>
               <div className="flex gap-4 items-center">
                 <Phone size={18} className="text-white flex-shrink-0" aria-hidden="true" />
                 <a href="tel:+919766989091" className="text-sm text-gray-300 hover:text-white transition-colors">

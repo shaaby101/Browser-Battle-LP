@@ -16,31 +16,31 @@ const TOP_LINKS = [
 const MAIN_LINKS = [
   { label: 'ABOUT US', href: '/about', hasDropdown: false },
   { label: 'ADMISSIONS', href: '/admissions', hasDropdown: false },
-  { label: 'ACADEMICS', href: '/academics', hasDropdown: true },
-  { label: 'PROGRAMS', href: '/programs', hasDropdown: false },
+  { label: 'ACADEMICS', href: '/academics', hasDropdown: false },
+  { label: 'DEPARTMENTS', href: '/departments', hasDropdown: true },
   { label: 'RESEARCH', href: '/research', hasDropdown: false },
   { label: 'PLACEMENTS', href: '#', hasDropdown: false },
   { label: 'CAMPUS LIFE', href: '/campus-life', hasDropdown: false },
   { label: 'CONTACT US', href: '/contact-us', hasDropdown: false },
 ];
 
-const ACADEMIC_CATEGORIES = [
-  { icon: Cpu, label: 'Engineering & Technology', href: '/academics#engineering', color: 'text-blue-600', bg: 'bg-blue-50' },
-  { icon: Briefcase, label: 'Management', href: '/academics#management', color: 'text-amber-600', bg: 'bg-amber-50' },
-  { icon: Calculator, label: 'Commerce', href: '/academics#commerce', color: 'text-green-600', bg: 'bg-green-50' },
-  { icon: FlaskConical, label: 'Sciences', href: '/academics#sciences', color: 'text-purple-600', bg: 'bg-purple-50' },
-  { icon: Palette, label: 'Creative Arts & Design', href: '/academics#creative-arts', color: 'text-pink-600', bg: 'bg-pink-50' },
-  { icon: BookOpen, label: 'Humanities & Social Sciences', href: '/academics#humanities', color: 'text-indigo-600', bg: 'bg-indigo-50' },
-  { icon: Scale, label: 'Law', href: '/academics#law', color: 'text-slate-600', bg: 'bg-slate-100' },
-  { icon: HeartPulse, label: 'Allied Healthcare', href: '/academics#healthcare', color: 'text-red-600', bg: 'bg-red-50' },
-  { icon: Monitor, label: 'Applied Computing', href: '/academics#computing', color: 'text-cyan-600', bg: 'bg-cyan-50' },
+const DEPARTMENT_CATEGORIES = [
+  { icon: Cpu, label: 'Engineering & Technology', href: '/departments/engineering', color: 'text-blue-600', bg: 'bg-blue-50' },
+  { icon: Briefcase, label: 'Management', href: '/departments/management', color: 'text-amber-600', bg: 'bg-amber-50' },
+  { icon: Calculator, label: 'Commerce', href: '/departments/commerce', color: 'text-green-600', bg: 'bg-green-50' },
+  { icon: FlaskConical, label: 'Sciences', href: '/departments/sciences', color: 'text-purple-600', bg: 'bg-purple-50' },
+  { icon: Palette, label: 'Creative Arts & Design', href: '/departments/creative-arts', color: 'text-pink-600', bg: 'bg-pink-50' },
+  { icon: BookOpen, label: 'Humanities & Social Sciences', href: '/departments/humanities', color: 'text-indigo-600', bg: 'bg-indigo-50' },
+  { icon: Scale, label: 'Law', href: '/departments/law', color: 'text-slate-600', bg: 'bg-slate-100' },
+  { icon: HeartPulse, label: 'Allied Healthcare', href: '/departments/healthcare', color: 'text-red-600', bg: 'bg-red-50' },
+  { icon: Monitor, label: 'Applied Computing', href: '/departments/computing', color: 'text-cyan-600', bg: 'bg-cyan-50' },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [academicsOpen, setAcademicsOpen] = useState(false);
-  const [mobileAcademicsOpen, setMobileAcademicsOpen] = useState(false);
+  const [departmentsOpen, setDepartmentsOpen] = useState(false);
+  const [mobileDepartmentsOpen, setMobileDepartmentsOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -51,8 +51,8 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsOpen(false);
-    setAcademicsOpen(false);
-    setMobileAcademicsOpen(false);
+    setDepartmentsOpen(false);
+    setMobileDepartmentsOpen(false);
   }, [pathname]);
 
   return (
@@ -102,8 +102,8 @@ export default function Navbar() {
                     key={label}
                     role="none"
                     className="relative group"
-                    onMouseEnter={() => setAcademicsOpen(true)}
-                    onMouseLeave={() => setAcademicsOpen(false)}
+                    onMouseEnter={() => setDepartmentsOpen(true)}
+                    onMouseLeave={() => setDepartmentsOpen(false)}
                   >
                     <Link
                       href={href}
@@ -113,23 +113,23 @@ export default function Navbar() {
                       }`}
                     >
                       {label}
-                      <ChevronDown size={14} className={`transition-transform duration-200 ${academicsOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown size={14} className={`transition-transform duration-200 ${departmentsOpen ? 'rotate-180' : ''}`} />
                     </Link>
                     <div className={`absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-[#12366b] to-[#f9b233] transition-all duration-300 ${active ? 'w-full' : 'w-0 group-hover:w-full'}`} />
 
                     {/* Dropdown */}
                     <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 transition-all duration-200 ${
-                      academicsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                      departmentsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                     }`}>
                       <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 w-[320px]">
                         <div className="flex items-center justify-between mb-3 pb-3 border-b border-gray-100">
-                          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Faculties</span>
-                          <Link href="/academics" className="text-xs font-bold text-[#12366b] hover:text-red-700 transition-colors">
+                          <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Departments</span>
+                          <Link href="/departments" className="text-xs font-bold text-[#12366b] hover:text-red-700 transition-colors">
                             View All →
                           </Link>
                         </div>
                         <div className="space-y-1">
-                          {ACADEMIC_CATEGORIES.map(({ icon: Icon, label, href, color, bg }) => (
+                          {DEPARTMENT_CATEGORIES.map(({ icon: Icon, label, href, color, bg }) => (
                             <Link
                               key={href}
                               href={href}
@@ -204,16 +204,16 @@ export default function Navbar() {
                       {label}
                     </Link>
                     <button
-                      onClick={() => setMobileAcademicsOpen(!mobileAcademicsOpen)}
+                      onClick={() => setMobileDepartmentsOpen(!mobileDepartmentsOpen)}
                       className="p-3 rounded-xl hover:bg-blue-50 transition-colors"
-                      aria-label="Toggle academics menu"
+                      aria-label="Toggle departments menu"
                     >
-                      <ChevronDown size={18} className={`text-gray-500 transition-transform duration-200 ${mobileAcademicsOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown size={18} className={`text-gray-500 transition-transform duration-200 ${mobileDepartmentsOpen ? 'rotate-180' : ''}`} />
                     </button>
                   </div>
-                  <div className={`overflow-hidden transition-all duration-300 ${mobileAcademicsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className={`overflow-hidden transition-all duration-300 ${mobileDepartmentsOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="pl-4 pr-2 py-2 space-y-1">
-                      {ACADEMIC_CATEGORIES.map(({ icon: Icon, label, href, color, bg }) => (
+                      {DEPARTMENT_CATEGORIES.map(({ icon: Icon, label, href, color, bg }) => (
                         <Link key={href} href={href} className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                           <div className={`w-8 h-8 ${bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
                             <Icon size={16} className={color} />

@@ -37,6 +37,8 @@ interface FormData {
   degreeCgpa: string;
 }
 
+type FormErrors = { [K in keyof FormData]?: string };
+
 const initialFormData: FormData = {
   level: '',
   faculty: '',
@@ -58,7 +60,7 @@ export default function AdmissionsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [referenceId, setReferenceId] = useState('');
 
@@ -82,7 +84,7 @@ export default function AdmissionsPage() {
   };
 
   const validateStep = (step: number): boolean => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: FormErrors = {};
 
     if (step === 1) {
       if (!formData.level) newErrors.level = 'Please select a level';
