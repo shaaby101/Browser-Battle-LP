@@ -3,7 +3,7 @@ import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Cpu, Briefcase, Calculator, FlaskConical, Palette, BookOpen, Scale, HeartPulse, Monitor, ChevronRight, GraduationCap, Users, Award, BookMarked, Building } from 'lucide-react';
+import { Cpu, Briefcase, Calculator, FlaskConical, Palette, BookOpen, Scale, HeartPulse, Monitor, ChevronRight, GraduationCap, Users, Award, BookMarked, Building, IndianRupee } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
 const DEPARTMENTS_DATA: Record<string, {
@@ -14,7 +14,7 @@ const DEPARTMENTS_DATA: Record<string, {
   description: string;
   overview: string;
   highlights: { icon: typeof Users; label: string; value: string }[];
-  programs: { level: string; courses: string[] }[];
+  programs: { level: string; courses: { name: string; fee: string }[] }[];
   facilities: string[];
   careers: string[];
 }> = {
@@ -33,30 +33,32 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate (B.Tech)',
+        level: 'Undergraduate (B.Tech) - 4 Years',
         courses: [
-          'Computer Science (AI, ML, Cybersecurity, Cloud Technology)',
-          'Aerospace Engineering',
-          'Aeronautical Engineering',
-          'Mechanical Engineering (Mechatronics, Robotics)',
-          'Civil Engineering',
-          'Electronics & Communication Engineering',
-          'Electrical & Electronics Engineering'
+          { name: 'Computer Science (AI, ML, Cybersecurity, Cloud Technology)', fee: '₹2,50,000/year' },
+          { name: 'Aerospace Engineering', fee: '₹2,75,000/year' },
+          { name: 'Aeronautical Engineering', fee: '₹2,75,000/year' },
+          { name: 'Mechanical Engineering (Mechatronics, Robotics)', fee: '₹2,25,000/year' },
+          { name: 'Civil Engineering', fee: '₹2,00,000/year' },
+          { name: 'Electronics & Communication Engineering', fee: '₹2,25,000/year' },
+          { name: 'Electrical & Electronics Engineering', fee: '₹2,00,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (M.Tech)',
+        level: 'Postgraduate (M.Tech) - 2 Years',
         courses: [
-          'Structural Engineering',
-          'Data Sciences',
-          'Cybersecurity',
-          'Embedded Systems',
-          'Aerospace Engineering'
+          { name: 'Structural Engineering', fee: '₹1,50,000/year' },
+          { name: 'Data Sciences', fee: '₹1,75,000/year' },
+          { name: 'Cybersecurity', fee: '₹1,75,000/year' },
+          { name: 'Embedded Systems', fee: '₹1,50,000/year' },
+          { name: 'Aerospace Engineering', fee: '₹1,75,000/year' }
         ]
       },
       {
-        level: 'Research',
-        courses: ['Ph.D. in various engineering disciplines']
+        level: 'Research (Ph.D.) - 3-5 Years',
+        courses: [
+          { name: 'Ph.D. in various engineering disciplines', fee: '₹1,25,000/year' }
+        ]
       }
     ],
     facilities: [
@@ -91,26 +93,26 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate (BBA/BMS)',
+        level: 'Undergraduate (BBA/BMS) - 3 Years',
         courses: [
-          'BBA in Corporate Management',
-          'BBA in Sports Management',
-          'BBA in Branding & Entrepreneurship',
-          'BMS in Aviation Management',
-          'BMS in International Business',
-          'BMS in Financial Services'
+          { name: 'BBA in Corporate Management', fee: '₹1,75,000/year' },
+          { name: 'BBA in Sports Management', fee: '₹2,00,000/year' },
+          { name: 'BBA in Branding & Entrepreneurship', fee: '₹1,85,000/year' },
+          { name: 'BMS in Aviation Management', fee: '₹2,25,000/year' },
+          { name: 'BMS in International Business', fee: '₹2,00,000/year' },
+          { name: 'BMS in Financial Services', fee: '₹1,90,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (MBA)',
+        level: 'Postgraduate (MBA) - 2 Years',
         courses: [
-          'Finance',
-          'Marketing',
-          'Human Resource Management',
-          'Business Analytics',
-          'International Business',
-          'Logistics & Supply Chain Management',
-          'Dual Specializations available'
+          { name: 'Finance', fee: '₹3,50,000/year' },
+          { name: 'Marketing', fee: '₹3,50,000/year' },
+          { name: 'Human Resource Management', fee: '₹3,25,000/year' },
+          { name: 'Business Analytics', fee: '₹3,75,000/year' },
+          { name: 'International Business', fee: '₹3,50,000/year' },
+          { name: 'Logistics & Supply Chain Management', fee: '₹3,25,000/year' },
+          { name: 'Dual Specializations available', fee: '₹3,75,000/year' }
         ]
       }
     ],
@@ -146,21 +148,21 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate (B.Com)',
+        level: 'Undergraduate (B.Com) - 3 Years',
         courses: [
-          'B.Com Regular',
-          'B.Com Honors',
-          'B.Com Professional (integrated with ACCA, CA, or CMA)',
-          'B.Com in Investment Banking',
-          'B.Com in Corporate Accounting'
+          { name: 'B.Com Regular', fee: '₹85,000/year' },
+          { name: 'B.Com Honors', fee: '₹1,10,000/year' },
+          { name: 'B.Com Professional (integrated with ACCA, CA, or CMA)', fee: '₹1,75,000/year' },
+          { name: 'B.Com in Investment Banking', fee: '₹1,50,000/year' },
+          { name: 'B.Com in Corporate Accounting', fee: '₹1,25,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (M.Com)',
+        level: 'Postgraduate (M.Com) - 2 Years',
         courses: [
-          'M.Com with Electives',
-          'M.Com in Accounting & Finance',
-          'M.Com in Financial Analysis'
+          { name: 'M.Com with Electives', fee: '₹75,000/year' },
+          { name: 'M.Com in Accounting & Finance', fee: '₹90,000/year' },
+          { name: 'M.Com in Financial Analysis', fee: '₹95,000/year' }
         ]
       }
     ],
@@ -196,25 +198,25 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate (B.Sc)',
+        level: 'Undergraduate (B.Sc) - 3 Years',
         courses: [
-          'Physics, Mathematics, Computer Science (PMCs)',
-          'Forensic Science',
-          'Biotechnology',
-          'Biochemistry',
-          'Genetics',
-          'Microbiology'
+          { name: 'Physics, Mathematics, Computer Science (PMCs)', fee: '₹95,000/year' },
+          { name: 'Forensic Science', fee: '₹1,25,000/year' },
+          { name: 'Biotechnology', fee: '₹1,35,000/year' },
+          { name: 'Biochemistry', fee: '₹1,20,000/year' },
+          { name: 'Genetics', fee: '₹1,30,000/year' },
+          { name: 'Microbiology', fee: '₹1,15,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (M.Sc)',
+        level: 'Postgraduate (M.Sc) - 2 Years',
         courses: [
-          'Physics',
-          'Chemistry',
-          'Biotechnology',
-          'Microbiology',
-          'Forensic Science',
-          'Psychology'
+          { name: 'Physics', fee: '₹85,000/year' },
+          { name: 'Chemistry', fee: '₹85,000/year' },
+          { name: 'Biotechnology', fee: '₹1,10,000/year' },
+          { name: 'Microbiology', fee: '₹95,000/year' },
+          { name: 'Forensic Science', fee: '₹1,00,000/year' },
+          { name: 'Psychology', fee: '₹90,000/year' }
         ]
       }
     ],
@@ -250,25 +252,25 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate (B.Des/B.A./B.Sc)',
+        level: 'Undergraduate (B.Des/B.A./B.Sc) - 4 Years',
         courses: [
-          'B.Des in Communication Design',
-          'B.Des in Product Design',
-          'B.Des in Interaction Design',
-          'B.A. in Fashion Design',
-          'B.A. in Film and Media',
-          'B.Sc in Animation',
-          'B.Sc in Gaming',
-          'B.Sc in Digital Filmmaking'
+          { name: 'B.Des in Communication Design', fee: '₹2,50,000/year' },
+          { name: 'B.Des in Product Design', fee: '₹2,50,000/year' },
+          { name: 'B.Des in Interaction Design', fee: '₹2,75,000/year' },
+          { name: 'B.A. in Fashion Design', fee: '₹2,25,000/year' },
+          { name: 'B.A. in Film and Media', fee: '₹2,00,000/year' },
+          { name: 'B.Sc in Animation', fee: '₹1,85,000/year' },
+          { name: 'B.Sc in Gaming', fee: '₹2,00,000/year' },
+          { name: 'B.Sc in Digital Filmmaking', fee: '₹2,25,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (M.Des/M.A./M.Sc)',
+        level: 'Postgraduate (M.Des/M.A./M.Sc) - 2 Years',
         courses: [
-          'M.Des in User Experience (UX)',
-          'M.Des in Interior Design',
-          'M.A. in Journalism & Mass Communication',
-          'M.Sc in Graphics & Animation'
+          { name: 'M.Des in User Experience (UX)', fee: '₹2,00,000/year' },
+          { name: 'M.Des in Interior Design', fee: '₹1,85,000/year' },
+          { name: 'M.A. in Journalism & Mass Communication', fee: '₹1,50,000/year' },
+          { name: 'M.Sc in Graphics & Animation', fee: '₹1,75,000/year' }
         ]
       }
     ],
@@ -304,22 +306,22 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate (B.A.)',
+        level: 'Undergraduate (B.A.) - 3 Years',
         courses: [
-          'Economics (Honors)',
-          'Psychology',
-          'Sociology',
-          'Journalism',
-          'English (Optional)'
+          { name: 'Economics (Honors)', fee: '₹1,10,000/year' },
+          { name: 'Psychology', fee: '₹1,25,000/year' },
+          { name: 'Sociology', fee: '₹90,000/year' },
+          { name: 'Journalism', fee: '₹1,35,000/year' },
+          { name: 'English (Optional)', fee: '₹85,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (M.A.)',
+        level: 'Postgraduate (M.A.) - 2 Years',
         courses: [
-          'Economics',
-          'Public Policy',
-          'Journalism & Mass Communication',
-          'Performing Arts'
+          { name: 'Economics', fee: '₹80,000/year' },
+          { name: 'Public Policy', fee: '₹95,000/year' },
+          { name: 'Journalism & Mass Communication', fee: '₹1,10,000/year' },
+          { name: 'Performing Arts', fee: '₹1,00,000/year' }
         ]
       }
     ],
@@ -357,16 +359,16 @@ const DEPARTMENTS_DATA: Record<string, {
       {
         level: 'Undergraduate (5-Year Integrated)',
         courses: [
-          'B.A. LL.B. (Honors)',
-          'B.B.A. LL.B. (Honors)'
+          { name: 'B.A. LL.B. (Honors)', fee: '₹2,00,000/year' },
+          { name: 'B.B.A. LL.B. (Honors)', fee: '₹2,25,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (LL.M.)',
+        level: 'Postgraduate (LL.M.) - 1 Year',
         courses: [
-          'Corporate and Commercial Law',
-          'Intellectual Property Law',
-          'Criminal Law'
+          { name: 'Corporate and Commercial Law', fee: '₹1,50,000/year' },
+          { name: 'Intellectual Property Law', fee: '₹1,60,000/year' },
+          { name: 'Criminal Law', fee: '₹1,40,000/year' }
         ]
       }
     ],
@@ -402,14 +404,14 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate Programs',
+        level: 'Undergraduate Programs - 4 Years',
         courses: [
-          'Bachelor of Physiotherapy (BPT)',
-          'B.Sc in Medical Lab Technology',
-          'B.Sc in Cardiac Technology',
-          'B.Sc in Anesthesia & Operation Theatre Technology',
-          'B.Sc in Cancer Biology',
-          'B.Sc in Psychology'
+          { name: 'Bachelor of Physiotherapy (BPT)', fee: '₹1,75,000/year' },
+          { name: 'B.Sc in Medical Lab Technology', fee: '₹1,25,000/year' },
+          { name: 'B.Sc in Cardiac Technology', fee: '₹1,40,000/year' },
+          { name: 'B.Sc in Anesthesia & Operation Theatre Technology', fee: '₹1,35,000/year' },
+          { name: 'B.Sc in Cancer Biology', fee: '₹1,30,000/year' },
+          { name: 'B.Sc in Psychology', fee: '₹1,15,000/year' }
         ]
       }
     ],
@@ -445,21 +447,21 @@ const DEPARTMENTS_DATA: Record<string, {
     ],
     programs: [
       {
-        level: 'Undergraduate (BCA)',
+        level: 'Undergraduate (BCA) - 3 Years',
         courses: [
-          'Artificial Intelligence',
-          'Cloud Technology',
-          'Cybersecurity',
-          'Data Analytics',
-          'Mobile Applications'
+          { name: 'Artificial Intelligence', fee: '₹1,50,000/year' },
+          { name: 'Cloud Technology', fee: '₹1,45,000/year' },
+          { name: 'Cybersecurity', fee: '₹1,55,000/year' },
+          { name: 'Data Analytics', fee: '₹1,50,000/year' },
+          { name: 'Mobile Applications', fee: '₹1,40,000/year' }
         ]
       },
       {
-        level: 'Postgraduate (MCA)',
+        level: 'Postgraduate (MCA) - 2 Years',
         courses: [
-          'General MCA',
-          'Information Security',
-          'Storage & Cloud Technology'
+          { name: 'General MCA', fee: '₹1,25,000/year' },
+          { name: 'Information Security', fee: '₹1,40,000/year' },
+          { name: 'Storage & Cloud Technology', fee: '₹1,35,000/year' }
         ]
       }
     ],
@@ -581,22 +583,40 @@ export default function DepartmentDetailPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">Programs Offered</h2>
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl font-bold text-gray-900">Programs Offered</h2>
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                <IndianRupee size={14} />
+                <span>Approximate annual tuition fees</span>
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {department.programs.map(({ level, courses }) => (
                 <div key={level} className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
                   <h3 className="font-bold text-jain-navy text-sm uppercase tracking-wider mb-4">{level}</h3>
-                  <ul className="space-y-3">
+                  <ul className="space-y-4">
                     {courses.map((course, i) => (
-                      <li key={i} className="flex items-start gap-2 text-gray-700 text-sm">
-                        <ChevronRight size={14} className="text-jain-red flex-shrink-0 mt-1" />
-                        <span>{course}</span>
+                      <li key={i} className="border-b border-gray-200 pb-3 last:border-0 last:pb-0">
+                        <div className="flex items-start gap-2 text-gray-700 text-sm">
+                          <ChevronRight size={14} className="text-jain-red flex-shrink-0 mt-1" />
+                          <div className="flex-1">
+                            <span className="block">{course.name}</span>
+                            <span className="flex items-center gap-1 text-jain-navy font-semibold mt-1">
+                              <IndianRupee size={12} />
+                              {course.fee.replace('₹', '')}
+                            </span>
+                          </div>
+                        </div>
                       </li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
+            <p className="mt-6 text-sm text-gray-500 text-center">
+              * Fees are approximate and subject to change. Additional charges may apply for hostel, examination, and other facilities. 
+              Please contact the admissions office for the latest fee structure.
+            </p>
           </motion.div>
         </div>
       </div>
