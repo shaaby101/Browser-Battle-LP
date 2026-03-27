@@ -2,43 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Global base styles ── */
+/* ── Base ── */
 html,
 body {
   scroll-behavior: smooth;
+  @apply antialiased text-jain-navy;
 }
 
-body {
-  @apply antialiased text-gray-900;
-}
-
-
-/* ── Animated underline for nav links ── */
+/* ── Professional nav underline ── */
 .nav-link {
-  @apply relative text-gray-700 font-medium text-sm transition-colors duration-200 hover:text-theme-red;
+  @apply relative font-semibold text-sm text-gray-700 transition-colors duration-200 hover:text-jain-red;
 }
 .nav-link::after {
   content: '';
-  @apply absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-theme-red rounded-full transition-all duration-300;
+  @apply absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-jain-red rounded-full transition-all duration-300;
 }
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   @apply w-full;
 }
 
-/* ── Counter animation ── */
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.count-up {
-  animation: countUp 0.6s ease forwards;
-}
-
-/* ── Pulse dot for live badge ── */
+/* ── Pulse dot for live announcements ── */
 @keyframes pulseDot {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(1.5); }
+  50%       { opacity: 0.35; transform: scale(1.6); }
 }
 .pulse-dot {
-  animation: pulseDot 1.5s ease-in-out infinite;
+  animation: pulseDot 1.8s ease-in-out infinite;
 }
