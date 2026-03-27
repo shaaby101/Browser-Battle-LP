@@ -16,7 +16,7 @@ const fadeUp = {
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: 'easeOut', delay: i * 0.08 },
+    transition: { duration: 0.55, delay: i * 0.08 },
   }),
 };
 
@@ -162,7 +162,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/campus-life"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/70 text-white font-bold text-sm rounded-xl transition-all duration-200 hover:bg-white/20 hover:scale-105 active:scale-95 tracking-wide"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/70 text-white font-bold text-sm rounded-xl transition-all duration-200 hover:bg-white/20 hover:scale-105 active:scale-95 tracking-wide"
               >
                 Discover Campus <ChevronRight size={16} aria-hidden="true" />
               </Link>
@@ -176,14 +176,14 @@ export default function HomePage() {
             <motion.div
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5, ease: 'easeOut' }}
+              transition={{ duration: 0.7, delay: 0.5 }}
               className="bg-white rounded-2xl shadow-card-lg border-t-4 border-jain-red overflow-hidden"
             >
               <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-gray-100">
                 {STATS.map(({ icon: Icon, value, label }, i) => (
                   <div
                     key={i}
-                    className="flex flex-col items-center text-center p-5 lg:p-7 hover:bg-jain-slate/50 transition-colors duration-200 group"
+                    className="flex flex-col items-center text-center p-5 lg:p-7 hover:bg-gray-50 transition-colors duration-200 group"
                   >
                     <div className="w-11 h-11 bg-red-50 group-hover:bg-red-100 rounded-xl flex items-center justify-center mb-3 transition-colors duration-200">
                       <Icon size={20} className="text-jain-red" aria-hidden="true" />
@@ -203,11 +203,25 @@ export default function HomePage() {
       </section>
 
       {/* ── Spacer below floating stats ── */}
-      <div className="h-28 bg-white" aria-hidden="true" />
+      <div className="h-24 bg-white" aria-hidden="true" />
 
-      {/* ── 2. ACADEMIC EXCELLENCE ────────────────────────── */}
-      <section className="bg-jain-slate py-24 lg:py-32" id="academics" aria-label="Programs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── 2. ACADEMIC EXCELLENCE (Light Photo Overlay) ─ */}
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-white" id="academics" aria-label="Programs">
+        {/* Academic Background Setup */}
+        <div className="absolute inset-0 z-0 select-none">
+          <Image
+            src="/academicexcellence.jpg"
+            alt="Academic Excellence Background"
+            fill
+            className="object-cover opacity-100"
+            style={{ objectPosition: 'center 40%' }}
+          />
+          {/* Extremely professional bright frosted overlay so the photo is visible as a lush texture but text is perfectly dark/readable */}
+          <div className="absolute inset-0 bg-white/85 backdrop-blur-[6px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white opacity-90" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
             className="mb-14"
@@ -220,11 +234,11 @@ export default function HomePage() {
               <BookOpen size={14} aria-hidden="true" />
               Academic Excellence
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-jain-navy mb-3">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-jain-navy mb-3 drop-shadow-sm">
               B.Tech Programs at Kanakapura
             </h2>
             <div className="w-12 h-1 bg-jain-red rounded-full mb-5" aria-hidden="true" />
-            <p className="text-gray-500 text-base sm:text-lg max-w-xl leading-relaxed">
+            <p className="text-gray-700 font-medium text-base sm:text-lg max-w-xl leading-relaxed">
               Industry-aligned engineering programs with dedicated research labs,
               global faculty, and 100% placement support.
             </p>
@@ -245,7 +259,7 @@ export default function HomePage() {
                 custom={i}
                 whileHover={{ scale: 1.02, y: -6 }}
                 transition={{ type: 'tween', duration: 0.22 }}
-                className="group bg-white rounded-2xl p-6 shadow-card hover:shadow-card-lg border border-gray-100 hover:border-jain-red/30 flex flex-col transition-colors duration-300 cursor-pointer"
+                className="group bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl hover:shadow-2xl border border-gray-100 hover:border-jain-red/40 flex flex-col transition-all duration-300 cursor-pointer"
               >
                 <div className="w-12 h-12 bg-red-50 group-hover:bg-jain-red rounded-xl flex items-center justify-center mb-5 flex-shrink-0 transition-colors duration-300">
                   <Icon size={22} className="text-jain-red group-hover:text-white transition-colors duration-300" aria-hidden="true" />
@@ -253,7 +267,7 @@ export default function HomePage() {
                 <h3 className="text-base font-bold text-jain-navy group-hover:text-jain-red mb-1 transition-colors duration-200">
                   {title}
                 </h3>
-                <p className="text-xs font-semibold text-jain-red/80 mb-3 leading-tight">
+                <p className="text-xs font-semibold text-jain-red/90 mb-3 leading-tight">
                   {specialisation}
                 </p>
                 <p className="text-xs text-gray-500 leading-relaxed flex-1 mb-5">{desc}</p>
@@ -268,10 +282,10 @@ export default function HomePage() {
             ))}
           </motion.div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <Link
               href="/academics"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-jain-navy text-jain-navy hover:bg-jain-navy hover:text-white font-bold text-sm rounded-xl transition-all duration-200 hover:scale-105 active:scale-95"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border-2 border-jain-navy bg-white/80 backdrop-blur-sm text-jain-navy hover:bg-jain-navy hover:text-white font-bold text-sm rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
             >
               View All Programs <ChevronRight size={15} aria-hidden="true" />
             </Link>
@@ -279,9 +293,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 3. CAMPUS LIFE HIGHLIGHTS ─────────────────────── */}
-      <section className="bg-white py-24 lg:py-32" id="campus-life" aria-label="Campus Life">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── 3. CAMPUS LIFE (Dark Premium Photo Overlay) ── */}
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-jain-navy" id="campus-life" aria-label="Campus Life">
+        
+        {/* Campus Background Setup */}
+        <div className="absolute inset-0 z-0 select-none">
+          <Image
+            src="/campus life.jpg"
+            alt="Campus Life at Kanakapura"
+            fill
+            className="object-cover opacity-100"
+            style={{ objectPosition: 'center 50%' }}
+          />
+          {/* Deep professional navy glass overlay so text turns white and highly readable, but photo is visible */}
+          <div className="absolute inset-0 bg-[#0b132b]/75" />
+          <div className="absolute inset-0 bg-jain-navy/50 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-jain-navy via-transparent to-[#0b132b] opacity-80" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="mb-14"
             initial="hidden"
@@ -289,15 +319,15 @@ export default function HomePage() {
             viewport={{ once: true, margin: '-80px' }}
             variants={fadeUp}
           >
-            <span className="inline-flex items-center gap-2 text-jain-red text-xs font-bold tracking-[0.15em] uppercase mb-3">
+            <span className="inline-flex items-center gap-2 text-red-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">
               <Users size={14} aria-hidden="true" />
               Campus Life
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-jain-navy mb-3">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
               World-Class Infrastructure
             </h2>
-            <div className="w-12 h-1 bg-jain-red rounded-full mb-5" aria-hidden="true" />
-            <p className="text-gray-500 text-base sm:text-lg max-w-xl leading-relaxed">
+            <div className="w-12 h-1 bg-red-400 rounded-full mb-5" aria-hidden="true" />
+            <p className="text-blue-200 text-base sm:text-lg max-w-xl leading-relaxed">
               Beyond academics — a campus built for champions.
             </p>
           </motion.div>
@@ -316,29 +346,25 @@ export default function HomePage() {
                 custom={i}
                 whileHover={{ scale: 1.02, y: -6 }}
                 transition={{ type: 'tween', duration: 0.22 }}
-                className="group relative bg-jain-slate rounded-2xl p-7 shadow-card hover:shadow-card-lg border border-transparent hover:border-jain-red/20 transition-all duration-300 overflow-hidden"
+                className="group relative bg-white/5 backdrop-blur-xl rounded-2xl p-7 shadow-2xl border border-white/10 hover:border-red-400/50 transition-all duration-300 overflow-hidden"
               >
-                {/* Decorative corner accent */}
-                <div
-                  className="absolute top-0 right-0 w-24 h-24 bg-jain-red/5 rounded-bl-[80px] group-hover:bg-jain-red/10 transition-colors duration-300"
-                  aria-hidden="true"
-                />
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-5 shadow-sm border border-gray-100">
-                  <Icon size={22} className="text-jain-red" aria-hidden="true" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-red-400/10 rounded-bl-[80px] group-hover:bg-red-400/20 transition-colors duration-300" aria-hidden="true" />
+                <div className="w-12 h-12 bg-jain-red rounded-xl flex items-center justify-center mb-5 shadow-inner border border-red-500/50">
+                  <Icon size={22} className="text-white" aria-hidden="true" />
                 </div>
-                <span className="inline-block text-[10px] font-bold text-jain-red tracking-widest uppercase mb-2">
+                <span className="inline-block text-[10px] font-bold text-red-400 tracking-widest uppercase mb-2">
                   {tag}
                 </span>
-                <h3 className="text-xl font-extrabold text-jain-navy mb-3">{name}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
+                <h3 className="text-xl font-extrabold text-white mb-3">{name}</h3>
+                <p className="text-sm text-gray-300 leading-relaxed font-light">{desc}</p>
               </motion.div>
             ))}
           </motion.div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <Link
               href="/campus-life"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-jain-red hover:bg-red-800 text-white font-bold text-sm rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 hover:shadow-lg"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-jain-red hover:bg-red-700 text-white font-bold text-sm rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 shadow-xl shadow-red-900/40 border border-red-500/50"
             >
               Explore Campus Life <ChevronRight size={15} aria-hidden="true" />
             </Link>
@@ -346,13 +372,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── 4. ADMISSIONS CTA STRIP ───────────────────────── */}
+      {/* ── 4. ADMISSIONS CTA STRIP (Red Accent) ────────────── */}
       <section
-        className="bg-gradient-to-r from-jain-navy via-[#122050] to-jain-navy py-20"
+        className="bg-jain-red py-20 relative overflow-hidden"
         id="admissions"
         aria-label="Admissions"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-red-800 to-transparent opacity-50" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="flex flex-col md:flex-row items-center justify-between gap-8"
             initial="hidden"
@@ -361,21 +389,21 @@ export default function HomePage() {
             variants={stagger}
           >
             <motion.div variants={fadeUp} className="text-center md:text-left">
-              <span className="inline-flex items-center gap-2 text-red-400 text-xs font-bold tracking-[0.15em] uppercase mb-3">
+              <span className="inline-flex items-center gap-2 text-red-200 text-xs font-bold tracking-[0.15em] uppercase mb-3">
                 <Award size={12} aria-hidden="true" />
                 Admissions Open
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3">
                 Begin Your Journey at JAIN Global Campus
               </h2>
-              <p className="text-blue-200 text-base max-w-xl leading-relaxed">
+              <p className="text-red-100 text-base max-w-xl leading-relaxed">
                 Applications are now open for B.Tech, MBA, and integrated programs for the 2026–27 academic session.
               </p>
             </motion.div>
             <motion.div variants={fadeUp} custom={1} className="flex-shrink-0">
               <Link
                 href="/admissions"
-                className="inline-flex items-center gap-2.5 px-9 py-4 bg-jain-red hover:bg-red-700 text-white font-bold text-base rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 hover:shadow-2xl tracking-wide"
+                className="inline-flex items-center gap-2.5 px-9 py-4 bg-white text-jain-red font-bold text-base rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl tracking-wide"
               >
                 Apply Now: 2026–27 <ChevronRight size={18} aria-hidden="true" />
               </Link>
