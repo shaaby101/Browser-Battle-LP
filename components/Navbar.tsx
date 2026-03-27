@@ -7,7 +7,7 @@ import { Menu, X, ChevronDown, Search, Cpu, Briefcase, Calculator, FlaskConical,
 
 const TOP_LINKS = [
   { label: 'AY 25-26', href: '#' },
-  { label: 'International Admissions', href: '#', hasDropdown: true },
+  { label: 'International Admissions', href: '/international-admissions', hasDropdown: true },
   { label: 'Alumni', href: '#' },
   { label: 'Current Students', href: '#' },
   { label: 'Blogs', href: '#' },
