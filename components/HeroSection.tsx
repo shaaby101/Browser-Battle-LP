@@ -57,7 +57,7 @@ export default function HeroSection() {
           </a>
           <a
             href="#campus-life"
-            className="inline-flex items-center px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white font-bold text-base rounded-xl transition-all duration-200 hover:bg-white/20 hover:scale-105 active:scale-95 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+            className="inline-flex items-center px-8 py-4 bg-white text-theme-red font-bold text-base rounded-xl transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-red-50 hover:shadow-2xl focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
             id="campus-tour-btn"
           >
             Take a Campus Tour
