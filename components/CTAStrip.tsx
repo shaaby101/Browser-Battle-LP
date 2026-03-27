@@ -16,7 +16,7 @@ export default function CTAStrip() {
             </p>
           </div>
           <a
-            href="#"
+            href="/campus-life"
             id="campus-life-btn"
             className="flex-shrink-0 inline-flex items-center px-8 py-4 bg-white text-theme-red font-bold text-base rounded-xl
                        transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-red-50 hover:shadow-2xl
