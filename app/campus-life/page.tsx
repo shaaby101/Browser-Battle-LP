@@ -44,10 +44,10 @@ const locations: Location[] = [
   },
   {
     id: 5,
-    name: 'Sports Complex',
+    name: 'Sports Ground',
     description: 'Olympic-standard facilities for indoor and outdoor sports',
     image: '/cricketground.jpg',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.4!2d77.54!3d12.974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzMwLjAiTiA3N8KwMzInMjQuMCJF!5e0!3m2!1sen!2sin!4v1234567894',
+    embedUrl: 'https://www.google.com/maps/embed?pb=!4v1774598974443!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJQ08yNVBDdXdF!2m2!1d12.64222630377511!2d77.44000642262301!3f294.85855006842826!4f-7.886005406703546!5f0.7820865974627469',
   },
   {
     id: 6,
@@ -61,7 +61,7 @@ const locations: Location[] = [
     name: 'Engineering Laboratories',
     description: 'Cutting-edge research labs with advanced technical equipment',
     image: '/empowering.jpg',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.6!2d77.56!3d12.976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU4JzQwLjAiTiA3N8KwMzMnMzYuMCJF!5e0!3m2!1sen!2sin!4v1234567896',
+    embedUrl: 'https://www.google.com/maps/embed?pb=!4v1774603485706!6m8!1m7!1sCAoSFkNJSE0wb2dLRUlDQWdJQ08yLTJOYXc.!2m2!1d12.64222563311668!2d77.44007541419238!3f305.2647298546833!4f-8.224462883345382!5f0.7820865974627469',
   },
   {
     id: 8,
