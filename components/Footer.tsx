@@ -1,23 +1,15 @@
 import Link from 'next/link';
 import {
   GraduationCap, Facebook, Twitter, Instagram, Linkedin, Youtube,
-  Phone, Mail, MapPin,
+  Phone, Mail, MapPin, ChevronRight
 } from 'lucide-react';
 
-const STUDY = [
-  { label: 'Study Campus',       href: '/academics'   },
-  { label: 'Distance Education', href: '/admissions'  },
-  { label: 'JAIN Online',        href: '/admissions'  },
-  { label: 'Foreign Campus',     href: '/about'       },
-  { label: 'Skill Development',  href: '/academics'   },
-];
-
-const QUICK = [
-  { label: 'Admissions 2026–27', href: '/admissions'  },
-  { label: 'Scholarships',       href: '/admissions'  },
-  { label: 'Placements',         href: '/research'    },
-  { label: 'Research',           href: '/research'    },
-  { label: 'Contact Us',         href: '/about'       },
+const RECENT_POSTS = [
+  { label: 'Direct Admission to B.Tech Aerospace Engineering', href: '/academics' },
+  { label: 'Apply for Computer Science & Artificial Intelligence', href: '/academics' },
+  { label: 'Global Campus Kanakapura Infrastructure Tour', href: '/campus-life' },
+  { label: 'Placement Records & Top Recruiters', href: '/research' },
+  { label: 'JAIN University Scholarships 2026–27', href: '/admissions' },
 ];
 
 const SOCIAL = [
@@ -30,31 +22,31 @@ const SOCIAL = [
 
 export default function Footer() {
   return (
-    <footer className="bg-jain-dark text-gray-400" aria-label="Site footer">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
-
-          {/* Col 1 – Brand */}
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="JAIN Global Campus">
-              <div className="w-10 h-10 bg-gradient-to-br from-jain-red to-red-800 rounded-xl flex items-center justify-center">
-                <GraduationCap size={18} className="text-white" aria-hidden="true" />
+    <footer className="bg-[#2a305e] text-gray-300 font-sans border-t-[6px] border-jain-red" aria-label="Site footer">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 border-b border-white/10 pb-12">
+          
+          {/* Col 1 – Brand & About */}
+          <div className="space-y-6">
+            <Link href="/" className="flex items-center gap-3 group inline-block" aria-label="JAIN Global Campus">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                <GraduationCap size={24} className="text-[#2a305e]" aria-hidden="true" />
               </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-white font-extrabold text-[14px] tracking-wide">JAIN</span>
-                <span className="text-gray-500 text-[9px] tracking-[0.1em] uppercase">Global Campus · Kanakapura</span>
+              <div className="flex flex-col">
+                <span className="text-white font-black text-lg tracking-wide uppercase">JAIN Global</span>
+                <span className="text-gray-400 text-[10px] tracking-[0.15em] uppercase font-bold">Kanakapura Campus</span>
               </div>
             </Link>
-            <p className="text-sm text-gray-500 leading-relaxed mb-6 max-w-xs">
-              A 300-acre NAAC A++ campus on Kanakapura Road, Bengaluru — shaping future leaders since 1990.
+            <p className="text-sm leading-relaxed text-gray-300">
+              JAIN (Deemed-to-be University) provides world-class education with dedicated B.Tech programs, state-of-the-art infrastructure, and continuous global placements through our specialized management quota seats and merit admissions.
             </p>
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex gap-3">
               {SOCIAL.map(({ icon: Icon, label, href }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 bg-white/5 hover:bg-jain-red text-gray-500 hover:text-white rounded-lg flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-jain-red text-white flex items-center justify-center transition-colors duration-300"
                 >
                   <Icon size={14} aria-hidden="true" />
                 </a>
@@ -62,84 +54,75 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2 – Study Options */}
+          {/* Col 2 – GET IN TOUCH */}
           <div>
-            <h4 className="text-white font-bold text-[10px] tracking-[0.18em] uppercase mb-5 pb-2 border-b border-white/10 relative">
-              Study Options
-              <span className="absolute bottom-0 left-0 w-7 h-0.5 bg-jain-red" aria-hidden="true" />
-            </h4>
-            <ul className="space-y-2.5">
-              {STUDY.map(({ label, href }) => (
-                <li key={label}>
-                  <Link href={href} className="text-sm text-gray-500 hover:text-white hover:pl-1 transition-all duration-150">
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3 – Quick Links */}
-          <div>
-            <h4 className="text-white font-bold text-[10px] tracking-[0.18em] uppercase mb-5 pb-2 border-b border-white/10 relative">
-              Quick Links
-              <span className="absolute bottom-0 left-0 w-7 h-0.5 bg-jain-red" aria-hidden="true" />
-            </h4>
-            <ul className="space-y-2.5">
-              {QUICK.map(({ label, href }) => (
-                <li key={label}>
-                  <Link href={href} className="text-sm text-gray-500 hover:text-white hover:pl-1 transition-all duration-150">
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4 – Contact */}
-          <div>
-            <h4 className="text-white font-bold text-[10px] tracking-[0.18em] uppercase mb-5 pb-2 border-b border-white/10 relative">
-              Contact Us
-              <span className="absolute bottom-0 left-0 w-7 h-0.5 bg-jain-red" aria-hidden="true" />
-            </h4>
-            <address className="not-italic space-y-4">
-              <div className="flex gap-2.5">
-                <MapPin size={13} className="text-jain-red mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  <strong className="text-white text-[11px] block mb-0.5">Kanakapura Campus</strong>
-                  Jakkasandra, Kanakapura Road,<br />
-                  Bengaluru – 562112, Karnataka
+            <h3 className="text-white font-extrabold text-base tracking-widest uppercase mb-8">
+              GET IN TOUCH
+            </h3>
+            <div className="space-y-6">
+              <div className="flex gap-4 items-start">
+                <MapPin size={18} className="text-white mt-1 flex-shrink-0" aria-hidden="true" />
+                <p className="text-sm leading-relaxed text-gray-300">
+                  <strong className="text-white block mb-1 tracking-wider text-xs">ADDRESS :</strong>
+                  JAIN Global Campus, Jakkasandra Post,<br />
+                  Kanakapura Road, Ramanagara District,<br />
+                  Bengaluru, Karnataka - 562112
                 </p>
               </div>
-              <div className="flex gap-2.5">
-                <MapPin size={13} className="text-jain-red mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  <strong className="text-white text-[11px] block mb-0.5">JC Road Campus</strong>
-                  #44/4, District Fund Road,<br />
-                  Bengaluru – 560069, Karnataka
-                </p>
-              </div>
-              <div className="space-y-1.5">
-                <a href="tel:+918028437600" className="flex items-center gap-2 text-xs text-gray-500 hover:text-white transition-colors">
-                  <Phone size={11} className="text-jain-red" aria-hidden="true" /> 080-28437600
+              <div className="flex gap-4 items-center">
+                <Phone size={18} className="text-white flex-shrink-0" aria-hidden="true" />
+                <a href="tel:+919766989091" className="text-sm text-gray-300 hover:text-white transition-colors">
+                  080-28437600, +91 97669 89091
                 </a>
-                <a href="mailto:admissions@jainuniversity.ac.in" className="flex items-center gap-2 text-xs text-gray-500 hover:text-white transition-colors break-all">
-                  <Mail size={11} className="text-jain-red flex-shrink-0" aria-hidden="true" />
+              </div>
+              <div className="flex gap-4 items-center">
+                <Mail size={18} className="text-white flex-shrink-0" aria-hidden="true" />
+                <a href="mailto:admissions@jainuniversity.ac.in" className="text-sm text-gray-300 hover:text-white transition-colors">
                   admissions@jainuniversity.ac.in
                 </a>
               </div>
-            </address>
+            </div>
           </div>
+
+          {/* Col 3 – DISCLAIMER */}
+          <div>
+            <h3 className="text-white font-extrabold text-base tracking-widest uppercase mb-8">
+              DISCLAIMER
+            </h3>
+            <p className="text-sm leading-relaxed text-gray-300 text-justify">
+              This portal is regarding the guidance of admissions through management and merit quota in the prestigious engineering and business programs. 
+              The infrastructure listed is fully authentic and represents the Kanakapura Campus. Visitors may seek out information from this portal that they find agreeable, 
+              either from the viewpoint of having content that matches an individual's needs. It is the decision of the viewer to contact us for further admission proceedings.
+            </p>
+          </div>
+
+          {/* Col 4 – RECENT POST / QUICK LINKS */}
+          <div>
+            <h3 className="text-white font-extrabold text-base tracking-widest uppercase mb-8">
+              RECENT POST
+            </h3>
+            <ul className="flex flex-col">
+              {RECENT_POSTS.map(({ label, href }, i) => (
+                <li key={label} className={`py-3.5 ${i !== RECENT_POSTS.length - 1 ? 'border-b border-dashed border-white/20' : ''}`}>
+                  <Link href={href} className="group flex items-start gap-3 text-sm text-gray-300 hover:text-white transition-colors">
+                    <ChevronRight size={14} className="text-white mt-0.5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                    <span className="leading-snug">{label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-5 text-xs text-gray-600">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 text-xs text-gray-400">
           <p>© 2026 JAIN (Deemed-to-be University). All Rights Reserved.</p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 font-medium uppercase tracking-wider">
             <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true">|</span>
             <Link href="#" className="hover:text-white transition-colors">Terms of Use</Link>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true">|</span>
             <Link href="#" className="hover:text-white transition-colors">Sitemap</Link>
           </div>
         </div>

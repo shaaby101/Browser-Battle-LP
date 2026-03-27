@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { label: 'Admissions',  href: '/admissions'  },
   { label: 'Research',    href: '/research'    },
   { label: 'Campus Life', href: '/campus-life' },
+  { label: 'Contact Us',  href: '/contact-us'  },
 ];
 
 export default function Navbar() {
