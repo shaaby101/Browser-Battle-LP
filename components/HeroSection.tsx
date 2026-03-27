@@ -10,15 +10,17 @@ export default function HeroSection() {
       {/* ── Background Image with dark overlay ── */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&auto=format&fit=crop&q=80"
-          alt="Vibrant university campus with students"
+          src="/jain university.jpg"
+          alt="JAIN University campus"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover"
+          style={{ objectPosition: 'center 30%' }}
           sizes="100vw"
         />
         {/* Gradient overlay: dark left → tinted-red right */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/70 to-red-950/50" />
+        {/* Lighter overlay so campus photo shows through clearly */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" />
       </div>
 
       {/* ── Hero Content ── */}
