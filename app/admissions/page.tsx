@@ -88,7 +88,7 @@ export default function AdmissionsPage() {
 
     if (step === 1) {
       if (!formData.level) newErrors.level = 'Please select a level';
-      if (!formData.faculty) newErrors.faculty = 'Please select a faculty';
+      if (!formData.faculty) newErrors.faculty = 'Please select a program';
       if (!formData.course) newErrors.course = 'Please select a course';
     }
 
@@ -302,7 +302,7 @@ export default function AdmissionsPage() {
                           </div>
                           <div>
                             <h4 className="font-bold text-gray-900">Select Your Program</h4>
-                            <p className="text-sm text-gray-500">Choose your level, faculty, and course</p>
+                            <p className="text-sm text-gray-500">Choose your level, program, and course</p>
                           </div>
                         </div>
 
@@ -323,10 +323,10 @@ export default function AdmissionsPage() {
                           {errors.level && <p className="text-red-500 text-sm mt-1">{errors.level}</p>}
                         </div>
 
-                        {/* Faculty */}
+                        {/* Program */}
                         <div>
                           <label className="block text-sm font-semibold text-gray-700 mb-2">
-                            Faculty <span className="text-red-500">*</span>
+                            Program <span className="text-red-500">*</span>
                           </label>
                           <select
                             value={formData.faculty}
@@ -334,7 +334,7 @@ export default function AdmissionsPage() {
                             disabled={!formData.level}
                             className={`w-full px-4 py-3 rounded-xl border ${errors.faculty ? 'border-red-500 bg-red-50' : 'border-gray-200'} focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all disabled:bg-gray-100 disabled:cursor-not-allowed`}
                           >
-                            <option value="">Select Faculty</option>
+                            <option value="">Select Program</option>
                             {getFacultyOptions().map(faculty => (
                               <option key={faculty} value={faculty}>{faculty}</option>
                             ))}
@@ -618,7 +618,7 @@ export default function AdmissionsPage() {
                           <div className="grid grid-cols-2 gap-2 text-sm">
                             <p className="text-gray-600">Program:</p>
                             <p className="font-medium text-gray-900">{formData.level === 'UG' ? 'Undergraduate' : 'Postgraduate'}</p>
-                            <p className="text-gray-600">Faculty:</p>
+                            <p className="text-gray-600">Program:</p>
                             <p className="font-medium text-gray-900">{formData.faculty}</p>
                             <p className="text-gray-600">Course:</p>
                             <p className="font-medium text-gray-900">{formData.course}</p>

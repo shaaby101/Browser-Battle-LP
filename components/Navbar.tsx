@@ -19,7 +19,7 @@ const MAIN_LINKS = [
   { label: 'ACADEMICS', href: '/academics', hasDropdown: false },
   { label: 'DEPARTMENTS', href: '/departments', hasDropdown: true },
   { label: 'RESEARCH', href: '/research', hasDropdown: false },
-  { label: 'PLACEMENTS', href: '#', hasDropdown: false },
+  { label: 'PLACEMENTS', href: '/placements', hasDropdown: false },
   { label: 'CAMPUS LIFE', href: '/campus-life', hasDropdown: false },
   { label: 'CONTACT US', href: '/contact-us', hasDropdown: false },
 ];
