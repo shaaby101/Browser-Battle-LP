@@ -359,7 +359,7 @@ export default function Navbar() {
       {/* Search Modal */}
       {searchOpen && (
         <div 
-          className="fixed inset-0 z-[9999] flex items-start justify-center pt-[10vh] px-4"
+          className="fixed inset-0 z-[99999] flex items-start justify-center pt-[15vh] sm:pt-[10vh] px-4"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               setSearchOpen(false);
@@ -371,50 +371,55 @@ export default function Navbar() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
           
           {/* Modal */}
-          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-4 duration-200">
+          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden">
             {/* Search Input */}
-            <div className="flex items-center gap-4 px-6 py-5 border-b border-gray-100">
-              <Search className="text-gray-400 flex-shrink-0" size={22} />
+            <div className="flex items-center gap-3 sm:gap-4 px-4 sm:px-6 py-4 sm:py-5 border-b border-gray-100">
+              <Search className="text-gray-400 flex-shrink-0" size={20} />
               <input
                 ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search pages, departments, programs..."
-                className="flex-1 text-lg text-gray-800 placeholder-gray-400 outline-none bg-transparent"
+                placeholder="Search pages, departments..."
+                className="flex-1 text-base sm:text-lg text-gray-800 placeholder-gray-400 outline-none bg-transparent"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
               />
               <button 
                 onClick={() => {
                   setSearchOpen(false);
                   setSearchQuery('');
                 }}
-                className="text-gray-400 hover:text-gray-600 transition-colors p-1"
+                className="text-gray-400 hover:text-gray-600 transition-colors p-2 -mr-2"
+                aria-label="Close search"
               >
-                <X size={20} />
+                <X size={22} />
               </button>
             </div>
 
             {/* Results */}
-            <div className="max-h-[60vh] overflow-y-auto">
+            <div className="max-h-[50vh] sm:max-h-[60vh] overflow-y-auto">
               {searchQuery.trim() === '' ? (
                 // Quick Links when empty
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Quick Links</h3>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {SEARCH_DATA.filter(item => item.category === 'Pages').slice(0, 6).map((item) => {
                       const Icon = item.icon;
                       return (
                         <button
                           key={item.href}
                           onClick={() => handleSearchSelect(item.href)}
-                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors text-left"
+                          className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors text-left"
                         >
-                          <div className="w-10 h-10 bg-[#12366b]/10 rounded-lg flex items-center justify-center">
+                          <div className="w-10 h-10 bg-[#12366b]/10 rounded-lg flex items-center justify-center flex-shrink-0">
                             <Icon size={18} className="text-[#12366b]" />
                           </div>
-                          <div>
+                          <div className="min-w-0">
                             <p className="text-sm font-semibold text-gray-800">{item.title}</p>
-                            <p className="text-xs text-gray-500">{item.description}</p>
+                            <p className="text-xs text-gray-500 truncate">{item.description}</p>
                           </div>
                         </button>
                       );
@@ -423,14 +428,14 @@ export default function Navbar() {
                 </div>
               ) : searchResults.length === 0 ? (
                 // No results
-                <div className="p-10 text-center">
-                  <Search className="mx-auto text-gray-300 mb-3" size={40} />
+                <div className="p-8 sm:p-10 text-center">
+                  <Search className="mx-auto text-gray-300 mb-3" size={36} />
                   <p className="text-gray-500 font-medium">No results found</p>
                   <p className="text-sm text-gray-400 mt-1">Try searching for pages, departments, or programs</p>
                 </div>
               ) : (
                 // Show results grouped by category
-                <div className="p-4">
+                <div className="p-3 sm:p-4">
                   {Object.entries(groupedResults).map(([category, items]) => (
                     <div key={category} className="mb-4">
                       <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider px-2 mb-2">{category}</h3>
@@ -441,16 +446,16 @@ export default function Navbar() {
                             <button
                               key={`${item.href}-${item.title}`}
                               onClick={() => handleSearchSelect(item.href)}
-                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition-colors text-left group"
+                              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 active:bg-blue-100 transition-colors text-left group"
                             >
-                              <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#12366b]/10 rounded-lg flex items-center justify-center transition-colors">
+                              <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#12366b]/10 rounded-lg flex items-center justify-center transition-colors flex-shrink-0">
                                 <Icon size={18} className="text-gray-500 group-hover:text-[#12366b] transition-colors" />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-semibold text-gray-800 group-hover:text-[#12366b] transition-colors">{item.title}</p>
                                 <p className="text-xs text-gray-500 truncate">{item.description}</p>
                               </div>
-                              <ChevronDown size={16} className="text-gray-300 -rotate-90 group-hover:text-[#12366b] transition-colors" />
+                              <ChevronDown size={16} className="text-gray-300 -rotate-90 group-hover:text-[#12366b] transition-colors flex-shrink-0" />
                             </button>
                           );
                         })}
@@ -462,9 +467,11 @@ export default function Navbar() {
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
-              <span>Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-gray-600 font-mono">ESC</kbd> to close</span>
-              <span>Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-gray-600 font-mono">↵</kbd> to select</span>
+            <div className="px-4 sm:px-6 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-xs text-gray-400">
+              <span className="hidden sm:inline">Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-gray-600 font-mono">ESC</kbd> to close</span>
+              <span className="sm:hidden">Tap outside to close</span>
+              <span className="hidden sm:inline">Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-gray-600 font-mono">↵</kbd> to select</span>
+              <span className="sm:hidden">Tap to select</span>
             </div>
           </div>
         </div>
